@@ -1,0 +1,71 @@
+fetch("https://hasuraapi.lidolearning.com/v1/graphql", {
+    "headers": {
+        "accept": "*/*",
+        "accept-language": "en-GB,en-US;q=0.9,en;q=0.8",
+        "authorization": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJiMDFlMjgxMi04YjU4LTQ5ZGUtYjVmOS1kMWQ5ODdlNDJlNjYiLCJuYW1lIjoiUHJpeWEgVmFpc2giLCJyb2xlcyI6WyJsaWJyYXJ5LWFkbWluIiwiY291cnNlLWFkbWluIiwibGlicmFyeS1yZWFkIiwibG8tcmVhZCIsInZjLXJlYWQiLCJjb3Vyc2UtcmVhZCIsInFiLWFkbWluIiwicWItZWRpdG9yIiwicXVpei1hZG1pbiIsInF1aXotZWRpdG9yIiwicnVicmljLWFkbWluIiwicWItdmlkZW8tYWRtaW4iLCJxYi1yZWFkIiwicXVpei1yZWFkIiwicWItdmlkZW8tcmVhZCIsInJ1YnJpYy1yZWFkIl0sImh0dHBzOi8vaGFzdXJhLmlvL2p3dC9jbGFpbXMiOnsieC1oYXN1cmEtYWxsb3dlZC1yb2xlcyI6WyJsaWJyYXJ5LWFkbWluIiwiY291cnNlLWFkbWluIiwibGlicmFyeS1yZWFkIiwibG8tcmVhZCIsInZjLXJlYWQiLCJjb3Vyc2UtcmVhZCIsInFiLWFkbWluIiwicWItZWRpdG9yIiwicXVpei1hZG1pbiIsInF1aXotZWRpdG9yIiwicnVicmljLWFkbWluIiwicWItdmlkZW8tYWRtaW4iLCJxYi1yZWFkIiwicXVpei1yZWFkIiwicWItdmlkZW8tcmVhZCIsInJ1YnJpYy1yZWFkIl0sIngtaGFzdXJhLWRlZmF1bHQtcm9sZSI6ImxpYnJhcnktYWRtaW4iLCJ4LWhhc3VyYS11c2VyLWlkIjoiYjAxZTI4MTItOGI1OC00OWRlLWI1ZjktZDFkOTg3ZTQyZTY2IiwieC1oYXN1cmEtb3JnLWlkIjoibGlkb2xlYXJuaW5nIn0sImlhdCI6MTYzMTc4ODExMCwiZXhwIjoxNjMxNzg5OTEwfQ.ltrgK5hLWSQGcytk3nZsdYlwIk826Zc2xf33eaCZ5Mk",
+        "cache-control": "no-cache",
+        "content-type": "application/json",
+        "pragma": "no-cache",
+        "sec-ch-ua": "\"Google Chrome\";v=\"93\", \" Not;A Brand\";v=\"99\", \"Chromium\";v=\"93\"",
+        "sec-ch-ua-mobile": "?0",
+        "sec-ch-ua-platform": "\"Linux\"",
+        "sec-fetch-dest": "empty",
+        "sec-fetch-mode": "cors",
+        "sec-fetch-site": "same-site",
+        "x-hasura-role": "course-admin"
+    },
+    "referrer": "https://admincontent.lidolearning.com/",
+    "referrerPolicy": "strict-origin-when-cross-origin",
+    "body": "{\"operationName\":\"getUnitIsActive\",\"variables\":{\"ids\":[\"ac4bfa46-d2c5-4866-a481-3cc7e7c729df\",\"0b0b312e-731f-45cc-8f62-62b59347af2e\",\"b5b5c7a7-eb5a-4114-a1a5-ef795009c883\",\"12602d80-34a0-4625-b724-75ec068caa4d\",\"c3e2b6e8-2a02-4e23-b16a-fc9b4366514c\",\"da5c1d9e-c20d-434d-9c97-e883d2d7366a\",\"6b8c3840-7946-49af-8a8f-b41e93270415\"]},\"query\":\"query getUnitIsActive($ids: [uuid!]) {\\n  course_units: course_course_units_v2(where: {unit_id: {_in: $ids}}) {\\n    course {\\n      slug\\n      __typename\\n    }\\n    unit {\\n      slug\\n      __typename\\n    }\\n    __typename\\n  }\\n}\\n\"}",
+    "method": "POST",
+    "mode": "cors",
+    "credentials": "include"
+});
+
+fetch("https://hasuraapi.lidolearning.com/v1/graphql", {
+    "headers": {
+      "accept": "*/*",
+      "accept-language": "en-GB,en-US;q=0.9,en;q=0.8",
+      "authorization": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJiMDFlMjgxMi04YjU4LTQ5ZGUtYjVmOS1kMWQ5ODdlNDJlNjYiLCJuYW1lIjoiUHJpeWEgVmFpc2giLCJyb2xlcyI6WyJsaWJyYXJ5LWFkbWluIiwiY291cnNlLWFkbWluIiwibGlicmFyeS1yZWFkIiwibG8tcmVhZCIsInZjLXJlYWQiLCJjb3Vyc2UtcmVhZCIsInFiLWFkbWluIiwicWItZWRpdG9yIiwicXVpei1hZG1pbiIsInF1aXotZWRpdG9yIiwicnVicmljLWFkbWluIiwicWItdmlkZW8tYWRtaW4iLCJxYi1yZWFkIiwicXVpei1yZWFkIiwicWItdmlkZW8tcmVhZCIsInJ1YnJpYy1yZWFkIl0sImh0dHBzOi8vaGFzdXJhLmlvL2p3dC9jbGFpbXMiOnsieC1oYXN1cmEtYWxsb3dlZC1yb2xlcyI6WyJsaWJyYXJ5LWFkbWluIiwiY291cnNlLWFkbWluIiwibGlicmFyeS1yZWFkIiwibG8tcmVhZCIsInZjLXJlYWQiLCJjb3Vyc2UtcmVhZCIsInFiLWFkbWluIiwicWItZWRpdG9yIiwicXVpei1hZG1pbiIsInF1aXotZWRpdG9yIiwicnVicmljLWFkbWluIiwicWItdmlkZW8tYWRtaW4iLCJxYi1yZWFkIiwicXVpei1yZWFkIiwicWItdmlkZW8tcmVhZCIsInJ1YnJpYy1yZWFkIl0sIngtaGFzdXJhLWRlZmF1bHQtcm9sZSI6ImxpYnJhcnktYWRtaW4iLCJ4LWhhc3VyYS11c2VyLWlkIjoiYjAxZTI4MTItOGI1OC00OWRlLWI1ZjktZDFkOTg3ZTQyZTY2IiwieC1oYXN1cmEtb3JnLWlkIjoibGlkb2xlYXJuaW5nIn0sImlhdCI6MTYzMTc4ODExMCwiZXhwIjoxNjMxNzg5OTEwfQ.ltrgK5hLWSQGcytk3nZsdYlwIk826Zc2xf33eaCZ5Mk",
+      "cache-control": "no-cache",
+      "content-type": "application/json",
+      "pragma": "no-cache",
+      "sec-ch-ua": "\"Google Chrome\";v=\"93\", \" Not;A Brand\";v=\"99\", \"Chromium\";v=\"93\"",
+      "sec-ch-ua-mobile": "?0",
+      "sec-ch-ua-platform": "\"Linux\"",
+      "sec-fetch-dest": "empty",
+      "sec-fetch-mode": "cors",
+      "sec-fetch-site": "same-site",
+      "x-hasura-role": "course-admin"
+    },
+    "referrer": "https://admincontent.lidolearning.com/",
+    "referrerPolicy": "strict-origin-when-cross-origin",
+    "body": "{\"operationName\":\"upsertCourse\",\"variables\":{\"course\":{\"id\":\"8a1618dd-f2b6-4170-bad1-ed41994760bf\",\"is_active\":false,\"board_id\":\"3\",\"slug\":\"M_7_ME\",\"subject_id\":\"1\",\"behaviour_id\":\"1\",\"title\":\"Math Grade 7 - Middle East\",\"display_title\":\"Math\",\"description\":\"Infer formulas, don't memorise them, identify the visual approach to math. Improve your calculation speed through Mental Math and be the champion of strategy through some cool logic and reasoning lessons!\",\"type_id\":\"1\",\"total_expected_classes\":\"141\",\"start_date\":\"2021-03-25T18:30:00.000Z\",\"no_of_skip_lessons\":null,\"no_of_repeat_lessons\":null,\"grades\":{\"data\":[{\"grade_id\":7,\"is_active\":true}],\"on_conflict\":{\"constraint\":\"course_grades_course_id_grade_id_key\",\"update_columns\":\"is_active\"}},\"recorded_videos\":{\"data\":[],\"on_conflict\":{\"constraint\":\"course_recorded_videos_course_id_recorded_video_id_key\",\"update_columns\":[\"is_active\",\"sort_order\"]}},\"content_units\":{\"data\":[{\"unit_id\":\"ac4bfa46-d2c5-4866-a481-3cc7e7c729df\",\"sort_order\":1,\"is_active\":true},{\"unit_id\":\"0b0b312e-731f-45cc-8f62-62b59347af2e\",\"sort_order\":2,\"is_active\":true},{\"unit_id\":\"b5b5c7a7-eb5a-4114-a1a5-ef795009c883\",\"sort_order\":3,\"is_active\":true},{\"unit_id\":\"12602d80-34a0-4625-b724-75ec068caa4d\",\"sort_order\":4,\"is_active\":true},{\"unit_id\":\"c3e2b6e8-2a02-4e23-b16a-fc9b4366514c\",\"sort_order\":5,\"is_active\":true},{\"unit_id\":\"da5c1d9e-c20d-434d-9c97-e883d2d7366a\",\"sort_order\":6,\"is_active\":true},{\"unit_id\":\"6b8c3840-7946-49af-8a8f-b41e93270415\",\"sort_order\":7,\"is_active\":true}],\"on_conflict\":{\"constraint\":\"course_content_units_course_id_unit_id_key\",\"update_columns\":[\"sort_order\",\"is_active\"]}},\"domains\":{\"data\":[{\"domain_id\":\"649e4a16-f7e7-436b-8a55-5c9ccbca42e8\",\"is_active\":true}],\"on_conflict\":{\"constraint\":\"domain_courses_course_id_domain_id_key\",\"update_columns\":[\"is_active\"]}},\"regions\":{\"data\":[{\"region_slug\":\"MIDDLE_EAST\",\"is_active\":true}],\"on_conflict\":{\"constraint\":\"course_regions_course_id_region_slug_key\",\"update_columns\":[\"is_active\"]}}},\"deletePathwayIds\":[]},\"query\":\"mutation upsertCourse($course: course_courses_insert_input!, $deletePathwayIds: [uuid!]) {\\n  course: insert_course_courses(objects: [$course], on_conflict: {constraint: courses_pkey, update_columns: [description, display_title, board_id, subject_id, title, start_date, no_of_skip_lessons, no_of_repeat_lessons, type_id, total_expected_classes, default_batching_eligible_lessons, title, is_active, is_repeatable, unit_duration_in_mins]}) {\\n    returning {\\n      id\\n      __typename\\n    }\\n    __typename\\n  }\\n  update_course_course_pathways(where: {id: {_in: $deletePathwayIds}}, _set: {is_active: false}) {\\n    returning {\\n      id\\n      __typename\\n    }\\n    __typename\\n  }\\n}\\n\"}",
+    "method": "POST",
+    "mode": "cors",
+    "credentials": "include"
+});
+
+fetch("https://hasuraapi.lidolearning.com/v1/graphql", {
+    "headers": {
+      "accept": "*/*",
+      "accept-language": "en-GB,en-US;q=0.9,en;q=0.8",
+      "authorization": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJiMDFlMjgxMi04YjU4LTQ5ZGUtYjVmOS1kMWQ5ODdlNDJlNjYiLCJuYW1lIjoiUHJpeWEgVmFpc2giLCJyb2xlcyI6WyJsaWJyYXJ5LWFkbWluIiwiY291cnNlLWFkbWluIiwibGlicmFyeS1yZWFkIiwibG8tcmVhZCIsInZjLXJlYWQiLCJjb3Vyc2UtcmVhZCIsInFiLWFkbWluIiwicWItZWRpdG9yIiwicXVpei1hZG1pbiIsInF1aXotZWRpdG9yIiwicnVicmljLWFkbWluIiwicWItdmlkZW8tYWRtaW4iLCJxYi1yZWFkIiwicXVpei1yZWFkIiwicWItdmlkZW8tcmVhZCIsInJ1YnJpYy1yZWFkIl0sImh0dHBzOi8vaGFzdXJhLmlvL2p3dC9jbGFpbXMiOnsieC1oYXN1cmEtYWxsb3dlZC1yb2xlcyI6WyJsaWJyYXJ5LWFkbWluIiwiY291cnNlLWFkbWluIiwibGlicmFyeS1yZWFkIiwibG8tcmVhZCIsInZjLXJlYWQiLCJjb3Vyc2UtcmVhZCIsInFiLWFkbWluIiwicWItZWRpdG9yIiwicXVpei1hZG1pbiIsInF1aXotZWRpdG9yIiwicnVicmljLWFkbWluIiwicWItdmlkZW8tYWRtaW4iLCJxYi1yZWFkIiwicXVpei1yZWFkIiwicWItdmlkZW8tcmVhZCIsInJ1YnJpYy1yZWFkIl0sIngtaGFzdXJhLWRlZmF1bHQtcm9sZSI6ImxpYnJhcnktYWRtaW4iLCJ4LWhhc3VyYS11c2VyLWlkIjoiYjAxZTI4MTItOGI1OC00OWRlLWI1ZjktZDFkOTg3ZTQyZTY2IiwieC1oYXN1cmEtb3JnLWlkIjoibGlkb2xlYXJuaW5nIn0sImlhdCI6MTYzMTc4ODExMCwiZXhwIjoxNjMxNzg5OTEwfQ.ltrgK5hLWSQGcytk3nZsdYlwIk826Zc2xf33eaCZ5Mk",
+      "cache-control": "no-cache",
+      "content-type": "application/json",
+      "pragma": "no-cache",
+      "sec-ch-ua": "\"Google Chrome\";v=\"93\", \" Not;A Brand\";v=\"99\", \"Chromium\";v=\"93\"",
+      "sec-ch-ua-mobile": "?0",
+      "sec-ch-ua-platform": "\"Linux\"",
+      "sec-fetch-dest": "empty",
+      "sec-fetch-mode": "cors",
+      "sec-fetch-site": "same-site",
+      "x-hasura-role": "course-admin"
+    },
+    "referrer": "https://admincontent.lidolearning.com/",
+    "referrerPolicy": "strict-origin-when-cross-origin",
+    "body": "{\"operationName\":\"upsertCoursePathway\",\"variables\":{\"updatedData\":[{\"id\":\"343c85cc-ab75-47a9-bfec-496a98f8ecd3\",\"course_id\":\"8a1618dd-f2b6-4170-bad1-ed41994760bf\",\"title\":\"P1\",\"is_floating\":false,\"total_classes\":6,\"total_expected_classes\":141,\"pathway_unit\":{\"data\":{\"id\":\"2ae9dab8-01b7-48e4-aeb7-ac4c84b807e6\",\"unit_id\":\"ac4bfa46-d2c5-4866-a481-3cc7e7c729df\",\"next_unit\":{\"data\":{\"id\":\"f0139428-0a5a-44a5-904e-dad31d43e471\",\"unit_id\":\"0b0b312e-731f-45cc-8f62-62b59347af2e\",\"next_unit\":{\"data\":{\"id\":\"466d086e-5ff0-4da4-8107-5f2e1d2da8eb\",\"unit_id\":\"b5b5c7a7-eb5a-4114-a1a5-ef795009c883\",\"next_unit\":{\"data\":{\"id\":\"c346c321-ea0e-48c1-acac-4f59fbeaf10d\",\"unit_id\":\"12602d80-34a0-4625-b724-75ec068caa4d\",\"next_unit\":{\"data\":{\"unit_id\":\"c3e2b6e8-2a02-4e23-b16a-fc9b4366514c\",\"next_unit\":{\"data\":{\"id\":\"795e6c82-7da8-4780-8c78-fc70febecb7d\",\"unit_id\":\"da5c1d9e-c20d-434d-9c97-e883d2d7366a\",\"save_point\":null,\"certificate\":null,\"transition_points\":{\"data\":[],\"on_conflict\":{\"constraint\":\"course_transition_points_source_course_pathway_unit_id_targ_key\",\"update_columns\":[\"is_active\"]}},\"next_unit\":{\"data\":{\"unit_id\":\"6b8c3840-7946-49af-8a8f-b41e93270415\",\"save_point\":null,\"certificate\":null,\"transition_points\":{\"data\":[],\"on_conflict\":{\"constraint\":\"course_transition_points_source_course_pathway_unit_id_targ_key\",\"update_columns\":[\"is_active\"]}}},\"on_conflict\":{\"constraint\":\"pathway_units_pkey\",\"update_columns\":[\"unit_id\",\"next_pathway_unit_id\",\"save_point\",\"course_certificate_id\"]}}},\"on_conflict\":{\"constraint\":\"pathway_units_pkey\",\"update_columns\":[\"unit_id\",\"next_pathway_unit_id\",\"save_point\",\"course_certificate_id\"]}},\"save_point\":null,\"certificate\":null,\"transition_points\":{\"data\":[],\"on_conflict\":{\"constraint\":\"course_transition_points_source_course_pathway_unit_id_targ_key\",\"update_columns\":[\"is_active\"]}}},\"on_conflict\":{\"constraint\":\"pathway_units_pkey\",\"update_columns\":[\"unit_id\",\"next_pathway_unit_id\",\"save_point\",\"course_certificate_id\"]}},\"save_point\":null,\"certificate\":null,\"transition_points\":{\"data\":[],\"on_conflict\":{\"constraint\":\"course_transition_points_source_course_pathway_unit_id_targ_key\",\"update_columns\":[\"is_active\"]}}},\"on_conflict\":{\"constraint\":\"pathway_units_pkey\",\"update_columns\":[\"unit_id\",\"next_pathway_unit_id\",\"save_point\",\"course_certificate_id\"]}},\"save_point\":null,\"certificate\":null,\"transition_points\":{\"data\":[],\"on_conflict\":{\"constraint\":\"course_transition_points_source_course_pathway_unit_id_targ_key\",\"update_columns\":[\"is_active\"]}}},\"on_conflict\":{\"constraint\":\"pathway_units_pkey\",\"update_columns\":[\"unit_id\",\"next_pathway_unit_id\",\"save_point\",\"course_certificate_id\"]}},\"save_point\":null,\"certificate\":null,\"transition_points\":{\"data\":[],\"on_conflict\":{\"constraint\":\"course_transition_points_source_course_pathway_unit_id_targ_key\",\"update_columns\":[\"is_active\"]}}},\"on_conflict\":{\"constraint\":\"pathway_units_pkey\",\"update_columns\":[\"unit_id\",\"next_pathway_unit_id\",\"save_point\",\"course_certificate_id\"]}},\"save_point\":null,\"certificate\":null,\"transition_points\":{\"data\":[],\"on_conflict\":{\"constraint\":\"course_transition_points_source_course_pathway_unit_id_targ_key\",\"update_columns\":[\"is_active\"]}}},\"on_conflict\":{\"constraint\":\"pathway_units_pkey\",\"update_columns\":[\"unit_id\",\"next_pathway_unit_id\",\"save_point\",\"course_certificate_id\"]}},\"default_batching_eligible_lessons\":null,\"is_default_pathway\":true}]},\"query\":\"mutation upsertCoursePathway($updatedData: [course_course_pathways_insert_input!]!) {\\n  course: insert_course_course_pathways(objects: $updatedData, on_conflict: {constraint: course_pathways_pkey, update_columns: [title, starting_pathway_unit_id, total_expected_classes, total_classes, is_floating, is_default_pathway, default_batching_eligible_lessons]}) {\\n    returning {\\n      id\\n      title\\n      __typename\\n    }\\n    __typename\\n  }\\n}\\n\"}",
+    "method": "POST",
+    "mode": "cors",
+    "credentials": "include"
+  });

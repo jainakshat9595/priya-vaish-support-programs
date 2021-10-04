@@ -1,0 +1,87 @@
+{
+   "data":{
+      "question_bank_questions":[
+         {
+            "id":"39e6f50b-182c-46dc-b1de-20b54cf52ad4",
+            "slug_id":"Sc_G9_EXEMPLAR_Ch15_Ex1_3",
+            "text":"Find out the wrong statement from the following",
+            "hint":"",
+            "solution":"(d) None of the above\n\n**Explanation:**\n\nWhite Revolution focused on the increase in the yield of dairy products. It was achieved by cross breeding local and exotic varieties or by breeding high milk yielding exotic variety of cattle like the Jersey. It also focused on developing a supply chain that made milk and dairy products available in sufficient quantities pan India.\n\nWhite revolution is also known as operation flood and was led by Dr. Verghese Kurien .\n\nSo, the correct answer is 'White revolution is meant for increase in milk production'",
+            "steps":[
+               
+            ],
+            "options":[
+               {
+                  "ceil":null,
+                  "text":"White revolution is meant for increase in milk production",
+                  "floor":null,
+                  "isCorrect":false
+               },
+               {
+                  "ceil":null,
+                  "text":"Blue revolution is meant for increase in fish production ",
+                  "floor":null,
+                  "isCorrect":false
+               },
+               {
+                  "ceil":null,
+                  "text":"Increasing food production without compromising with environmental quality is called as sustainable agriculture",
+                  "floor":null,
+                  "isCorrect":false
+               },
+               {
+                  "ceil":null,
+                  "text":" None of the above ",
+                  "floor":null,
+                  "isCorrect":true
+               }
+            ],
+            "widgets":[
+               
+            ],
+            "status_id":3,
+            "difficulty_level_id":1,
+            "format_id":"scq",
+            "type_id":2,
+            "rubric_id":"",
+            "is_partial_marking":false,
+            "question_image":null,
+            "question_learning_outcomes":[
+               {
+                  "is_active":true,
+                  "learning_outcome_id":"BI_EC_ES_LO_2",
+                  "__typename":"question_bank_question_learning_outcomes"
+               }
+            ],
+            "version":1,
+            "exercise":{
+               "exercise_id":"088ee184-cc4a-4bbb-a578-43a77b663b9b",
+               "sort_order":3,
+               "__typename":"question_bank_qb_exercise_questions"
+            },
+            "board_grades":[
+               {
+                  "id":"4f9687a7-e635-40d7-9601-dcca6c87c802",
+                  "grade_id":9,
+                  "board_id":1,
+                  "is_active":true,
+                  "__typename":"question_bank_question_board_grades"
+               }
+            ],
+            "video_solutions":null,
+            "question_reviews":[
+               {
+                  "creator_id":"b01e2812-8b58-49de-b5f9-d1d987e42e66",
+                  "reviewer_id":"b01e2812-8b58-49de-b5f9-d1d987e42e66",
+                  "num_times_rejected":0,
+                  "__typename":"question_bank_question_review_track"
+               }
+            ],
+            "comments":[
+               
+            ],
+            "__typename":"question_bank_questions"
+         }
+      ]
+   }
+}

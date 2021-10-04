@@ -1,0 +1,17 @@
+curl 'https://hasuraapi.lidolearning.com/v1/graphql' \
+  -H 'authority: hasuraapi.lidolearning.com' \
+  -H 'sec-ch-ua: " Not;A Brand";v="99", "Google Chrome";v="91", "Chromium";v="91"' \
+  -H 'accept: */*' \
+  -H 'x-hasura-role: qb-admin' \
+  -H 'authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJiMDFlMjgxMi04YjU4LTQ5ZGUtYjVmOS1kMWQ5ODdlNDJlNjYiLCJuYW1lIjoiUHJpeWEgVmFpc2giLCJyb2xlcyI6WyJxYi1hZG1pbiIsInFiLWVkaXRvciIsInF1aXotZWRpdG9yIiwicXVpei1hZG1pbiIsInJ1YnJpYy1hZG1pbiIsImxpYnJhcnktcmVhZCIsImxvLXJlYWQiLCJ2Yy1yZWFkIiwiY291cnNlLXJlYWQiLCJxYi12aWRlby1hZG1pbiIsInFiLXJlYWQiLCJxdWl6LXJlYWQiLCJxYi12aWRlby1yZWFkIiwicnVicmljLXJlYWQiXSwiaHR0cHM6Ly9oYXN1cmEuaW8vand0L2NsYWltcyI6eyJ4LWhhc3VyYS1hbGxvd2VkLXJvbGVzIjpbInFiLWFkbWluIiwicWItZWRpdG9yIiwicXVpei1lZGl0b3IiLCJxdWl6LWFkbWluIiwicnVicmljLWFkbWluIiwibGlicmFyeS1yZWFkIiwibG8tcmVhZCIsInZjLXJlYWQiLCJjb3Vyc2UtcmVhZCIsInFiLXZpZGVvLWFkbWluIiwicWItcmVhZCIsInF1aXotcmVhZCIsInFiLXZpZGVvLXJlYWQiLCJydWJyaWMtcmVhZCJdLCJ4LWhhc3VyYS1kZWZhdWx0LXJvbGUiOiJxYi1hZG1pbiIsIngtaGFzdXJhLXVzZXItaWQiOiJiMDFlMjgxMi04YjU4LTQ5ZGUtYjVmOS1kMWQ5ODdlNDJlNjYiLCJ4LWhhc3VyYS1vcmctaWQiOiJsaWRvbGVhcm5pbmcifSwiaWF0IjoxNjI0ODkxMjExLCJleHAiOjE2MjU0OTYwMTF9.muTy1g_dxLJEYExMB47YvLOPA_eGMEi_GoPZkqo0CH4' \
+  -H 'sec-ch-ua-mobile: ?0' \
+  -H 'user-agent: Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.114 Safari/537.36' \
+  -H 'content-type: application/json' \
+  -H 'origin: https://adminqb.lidolearning.com' \
+  -H 'sec-fetch-site: same-site' \
+  -H 'sec-fetch-mode: cors' \
+  -H 'sec-fetch-dest: empty' \
+  -H 'referer: https://adminqb.lidolearning.com/' \
+  -H 'accept-language: en-GB,en-US;q=0.9,en;q=0.8' \
+  --data-raw $'{"operationName":"getQuestionBySlugId","variables":{"slug_id":"Sc_G9_EXEMPLAR_Ch15_Ex1_3"},"query":"query getQuestionBySlugId($slug_id: String\u0021) {\\n  question_bank_questions(where: {slug_id: {_eq: $slug_id}}) {\\n    id\\n    slug_id\\n    text\\n    hint\\n    solution\\n    steps\\n    options\\n    widgets\\n    status_id\\n    difficulty_level_id\\n    format_id\\n    type_id\\n    rubric_id\\n    is_partial_marking\\n    question_image\\n    question_learning_outcomes(where: {is_active: {_eq: true}}) {\\n      is_active\\n      learning_outcome_id\\n      __typename\\n    }\\n    version\\n    exercise {\\n      exercise_id\\n      sort_order\\n      __typename\\n    }\\n    board_grades(where: {is_active: {_eq: true}}) {\\n      id\\n      grade_id\\n      board_id\\n      is_active\\n      __typename\\n    }\\n    video_solutions {\\n      url\\n      transcript\\n      status_id\\n      thumbnail_url\\n      upload_date\\n      video_title\\n      description\\n      __typename\\n    }\\n    question_reviews {\\n      creator_id\\n      reviewer_id\\n      num_times_rejected\\n      __typename\\n    }\\n    comments(where: {comment_status_id: {_neq: 3}}, order_by: {created_at: asc}) {\\n      comment_metadata\\n      comment_status_id\\n      comment_text\\n      created_by\\n      id\\n      parent_comment_id\\n      __typename\\n    }\\n    __typename\\n  }\\n}\\n"}' \
+  --compressed

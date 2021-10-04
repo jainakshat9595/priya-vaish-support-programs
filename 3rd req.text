@@ -1,0 +1,436 @@
+fetch("https://hasuraapi.lidolearning.com/v1/graphql", {
+  "headers": {
+    "accept": "*/*",
+    "accept-language": "en-GB,en-US;q=0.9,en;q=0.8",
+    "authorization": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJiMDFlMjgxMi04YjU4LTQ5ZGUtYjVmOS1kMWQ5ODdlNDJlNjYiLCJuYW1lIjoiUHJpeWEgVmFpc2giLCJyb2xlcyI6WyJsaWJyYXJ5LWFkbWluIiwiY291cnNlLWFkbWluIiwibGlicmFyeS1yZWFkIiwibG8tcmVhZCIsInZjLXJlYWQiLCJjb3Vyc2UtcmVhZCIsInFiLWFkbWluIiwicWItZWRpdG9yIiwicXVpei1hZG1pbiIsInF1aXotZWRpdG9yIiwicnVicmljLWFkbWluIiwicWItdmlkZW8tYWRtaW4iLCJxYi1yZWFkIiwicXVpei1yZWFkIiwicWItdmlkZW8tcmVhZCIsInJ1YnJpYy1yZWFkIl0sImh0dHBzOi8vaGFzdXJhLmlvL2p3dC9jbGFpbXMiOnsieC1oYXN1cmEtYWxsb3dlZC1yb2xlcyI6WyJsaWJyYXJ5LWFkbWluIiwiY291cnNlLWFkbWluIiwibGlicmFyeS1yZWFkIiwibG8tcmVhZCIsInZjLXJlYWQiLCJjb3Vyc2UtcmVhZCIsInFiLWFkbWluIiwicWItZWRpdG9yIiwicXVpei1hZG1pbiIsInF1aXotZWRpdG9yIiwicnVicmljLWFkbWluIiwicWItdmlkZW8tYWRtaW4iLCJxYi1yZWFkIiwicXVpei1yZWFkIiwicWItdmlkZW8tcmVhZCIsInJ1YnJpYy1yZWFkIl0sIngtaGFzdXJhLWRlZmF1bHQtcm9sZSI6ImxpYnJhcnktYWRtaW4iLCJ4LWhhc3VyYS11c2VyLWlkIjoiYjAxZTI4MTItOGI1OC00OWRlLWI1ZjktZDFkOTg3ZTQyZTY2IiwieC1oYXN1cmEtb3JnLWlkIjoibGlkb2xlYXJuaW5nIn0sImlhdCI6MTYzMTc3NDA3NCwiZXhwIjoxNjMxNzc1ODc0fQ.p4vVhASdvgIllhiUlMmq8cdd3bb1cGxaL5WZpBSo5KQ",
+    "cache-control": "no-cache",
+    "content-type": "application/json",
+    "pragma": "no-cache",
+    "sec-ch-ua": "\"Google Chrome\";v=\"93\", \" Not;A Brand\";v=\"99\", \"Chromium\";v=\"93\"",
+    "sec-ch-ua-mobile": "?0",
+    "sec-ch-ua-platform": "\"Linux\"",
+    "sec-fetch-dest": "empty",
+    "sec-fetch-mode": "cors",
+    "sec-fetch-site": "same-site",
+    "x-hasura-role": "course-admin"
+  },
+  "referrer": "https://admincontent.lidolearning.com/",
+  "referrerPolicy": "strict-origin-when-cross-origin",
+  "body": "{\"operationName\":\"upsertCoursePathway\",\"variables\":{\"updatedData\":[{\"id\":\"343c85cc-ab75-47a9-bfec-496a98f8ecd3\",\"course_id\":\"8a1618dd-f2b6-4170-bad1-ed41994760bf\",\"title\":\"P1\",\"is_floating\":false,\"total_classes\":2,\"total_expected_classes\":141,\"pathway_unit\":{\"data\":{\"id\":\"2ae9dab8-01b7-48e4-aeb7-ac4c84b807e6\",\"unit_id\":\"ac4bfa46-d2c5-4866-a481-3cc7e7c729df\",\"next_unit\":{\"data\":{\"unit_id\":\"0b0b312e-731f-45cc-8f62-62b59347af2e\",\"save_point\":null,\"certificate\":null,\"transition_points\":{\"data\":[],\"on_conflict\":{\"constraint\":\"course_transition_points_source_course_pathway_unit_id_targ_key\",\"update_columns\":[\"is_active\"]}}},\"on_conflict\":{\"constraint\":\"pathway_units_pkey\",\"update_columns\":[\"unit_id\",\"next_pathway_unit_id\",\"save_point\",\"course_certificate_id\"]}},\"save_point\":null,\"certificate\":null,\"transition_points\":{\"data\":[],\"on_conflict\":{\"constraint\":\"course_transition_points_source_course_pathway_unit_id_targ_key\",\"update_columns\":[\"is_active\"]}}},\"on_conflict\":{\"constraint\":\"pathway_units_pkey\",\"update_columns\":[\"unit_id\",\"next_pathway_unit_id\",\"save_point\",\"course_certificate_id\"]}},\"default_batching_eligible_lessons\":null,\"is_default_pathway\":true}]},\"query\":\"mutation upsertCoursePathway($updatedData: [course_course_pathways_insert_input!]!) {\\n  course: insert_course_course_pathways(objects: $updatedData, on_conflict: {constraint: course_pathways_pkey, update_columns: [title, starting_pathway_unit_id, total_expected_classes, total_classes, is_floating, is_default_pathway, default_batching_eligible_lessons]}) {\\n    returning {\\n      id\\n      title\\n      __typename\\n    }\\n    __typename\\n  }\\n}\\n\"}",
+  "method": "POST",
+  "mode": "cors",
+  "credentials": "include"
+});
+
+{
+	"operationName":"upsertCoursePathway",
+	"variables":{
+		"updatedData":[
+			{
+				"id":"343c85cc-ab75-47a9-bfec-496a98f8ecd3",
+				"course_id":"8a1618dd-f2b6-4170-bad1-ed41994760bf",
+				"title":"P1",
+				"is_floating":false,
+				"total_classes":2,
+				"total_expected_classes":141,
+				"pathway_unit":{
+					"data":{
+						"id":"2ae9dab8-01b7-48e4-aeb7-ac4c84b807e6",
+						"unit_id":"ac4bfa46-d2c5-4866-a481-3cc7e7c729df",
+						"next_unit":{
+							"data":{
+								"unit_id":"0b0b312e-731f-45cc-8f62-62b59347af2e",
+								"save_point":null,
+								"certificate":null,
+								"transition_points":{
+									"data":[
+										
+									],
+									"on_conflict":{
+										"constraint":"course_transition_points_source_course_pathway_unit_id_targ_key",
+										"update_columns":[
+											"is_active"
+										]
+									}
+								}
+							},
+							"on_conflict":{
+								"constraint":"pathway_units_pkey",
+								"update_columns":[
+									"unit_id",
+									"next_pathway_unit_id",
+									"save_point",
+									"course_certificate_id"
+								]
+							}
+						},
+						"save_point":null,
+						"certificate":null,
+						"transition_points":{
+							"data":[
+								
+							],
+							"on_conflict":{
+								"constraint":"course_transition_points_source_course_pathway_unit_id_targ_key",
+								"update_columns":[
+									"is_active"
+								]
+							}
+						}
+					},
+					"on_conflict":{
+						"constraint":"pathway_units_pkey",
+						"update_columns":[
+							"unit_id",
+							"next_pathway_unit_id",
+							"save_point",
+							"course_certificate_id"
+						]
+					}
+				},
+				"default_batching_eligible_lessons":null,
+				"is_default_pathway":true
+			}
+		]
+	},
+	"query":"mutation upsertCoursePathway($updatedData: [course_course_pathways_insert_input!]!) {\\n  course: insert_course_course_pathways(objects: $updatedData, on_conflict: {constraint: course_pathways_pkey, update_columns: [title, starting_pathway_unit_id, total_expected_classes, total_classes, is_floating, is_default_pathway, default_batching_eligible_lessons]}) {\\n    returning {\\n      id\\n      title\\n      __typename\\n    }\\n    __typename\\n  }\\n}\\n"
+}
+
+---
+
+fetch("https://hasuraapi.lidolearning.com/v1/graphql", {
+    "headers": {
+      "accept": "*/*",
+      "accept-language": "en-GB,en-US;q=0.9,en;q=0.8",
+      "authorization": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJiMDFlMjgxMi04YjU4LTQ5ZGUtYjVmOS1kMWQ5ODdlNDJlNjYiLCJuYW1lIjoiUHJpeWEgVmFpc2giLCJyb2xlcyI6WyJsaWJyYXJ5LWFkbWluIiwiY291cnNlLWFkbWluIiwibGlicmFyeS1yZWFkIiwibG8tcmVhZCIsInZjLXJlYWQiLCJjb3Vyc2UtcmVhZCIsInFiLWFkbWluIiwicWItZWRpdG9yIiwicXVpei1hZG1pbiIsInF1aXotZWRpdG9yIiwicnVicmljLWFkbWluIiwicWItdmlkZW8tYWRtaW4iLCJxYi1yZWFkIiwicXVpei1yZWFkIiwicWItdmlkZW8tcmVhZCIsInJ1YnJpYy1yZWFkIl0sImh0dHBzOi8vaGFzdXJhLmlvL2p3dC9jbGFpbXMiOnsieC1oYXN1cmEtYWxsb3dlZC1yb2xlcyI6WyJsaWJyYXJ5LWFkbWluIiwiY291cnNlLWFkbWluIiwibGlicmFyeS1yZWFkIiwibG8tcmVhZCIsInZjLXJlYWQiLCJjb3Vyc2UtcmVhZCIsInFiLWFkbWluIiwicWItZWRpdG9yIiwicXVpei1hZG1pbiIsInF1aXotZWRpdG9yIiwicnVicmljLWFkbWluIiwicWItdmlkZW8tYWRtaW4iLCJxYi1yZWFkIiwicXVpei1yZWFkIiwicWItdmlkZW8tcmVhZCIsInJ1YnJpYy1yZWFkIl0sIngtaGFzdXJhLWRlZmF1bHQtcm9sZSI6ImxpYnJhcnktYWRtaW4iLCJ4LWhhc3VyYS11c2VyLWlkIjoiYjAxZTI4MTItOGI1OC00OWRlLWI1ZjktZDFkOTg3ZTQyZTY2IiwieC1oYXN1cmEtb3JnLWlkIjoibGlkb2xlYXJuaW5nIn0sImlhdCI6MTYzMTc3NTI3OCwiZXhwIjoxNjMxNzc3MDc4fQ.kFv7nHJfxOzL3XwjnhTzMvhV97SrNP5mmCedsj_f5v4",
+      "cache-control": "no-cache",
+      "content-type": "application/json",
+      "pragma": "no-cache",
+      "sec-ch-ua": "\"Google Chrome\";v=\"93\", \" Not;A Brand\";v=\"99\", \"Chromium\";v=\"93\"",
+      "sec-ch-ua-mobile": "?0",
+      "sec-ch-ua-platform": "\"Linux\"",
+      "sec-fetch-dest": "empty",
+      "sec-fetch-mode": "cors",
+      "sec-fetch-site": "same-site",
+      "x-hasura-role": "course-admin"
+    },
+    "referrer": "https://admincontent.lidolearning.com/",
+    "referrerPolicy": "strict-origin-when-cross-origin",
+    "body": "{\"operationName\":\"upsertCoursePathway\",\"variables\":{\"updatedData\":[{\"id\":\"343c85cc-ab75-47a9-bfec-496a98f8ecd3\",\"course_id\":\"8a1618dd-f2b6-4170-bad1-ed41994760bf\",\"title\":\"P1\",\"is_floating\":false,\"total_classes\":3,\"total_expected_classes\":141,\"pathway_unit\":{\"data\":{\"id\":\"2ae9dab8-01b7-48e4-aeb7-ac4c84b807e6\",\"unit_id\":\"ac4bfa46-d2c5-4866-a481-3cc7e7c729df\",\"next_unit\":{\"data\":{\"id\":\"f0139428-0a5a-44a5-904e-dad31d43e471\",\"unit_id\":\"0b0b312e-731f-45cc-8f62-62b59347af2e\",\"next_unit\":{\"data\":{\"unit_id\":\"b5b5c7a7-eb5a-4114-a1a5-ef795009c883\",\"save_point\":null,\"certificate\":null,\"transition_points\":{\"data\":[],\"on_conflict\":{\"constraint\":\"course_transition_points_source_course_pathway_unit_id_targ_key\",\"update_columns\":[\"is_active\"]}}},\"on_conflict\":{\"constraint\":\"pathway_units_pkey\",\"update_columns\":[\"unit_id\",\"next_pathway_unit_id\",\"save_point\",\"course_certificate_id\"]}},\"save_point\":null,\"certificate\":null,\"transition_points\":{\"data\":[],\"on_conflict\":{\"constraint\":\"course_transition_points_source_course_pathway_unit_id_targ_key\",\"update_columns\":[\"is_active\"]}}},\"on_conflict\":{\"constraint\":\"pathway_units_pkey\",\"update_columns\":[\"unit_id\",\"next_pathway_unit_id\",\"save_point\",\"course_certificate_id\"]}},\"save_point\":null,\"certificate\":null,\"transition_points\":{\"data\":[],\"on_conflict\":{\"constraint\":\"course_transition_points_source_course_pathway_unit_id_targ_key\",\"update_columns\":[\"is_active\"]}}},\"on_conflict\":{\"constraint\":\"pathway_units_pkey\",\"update_columns\":[\"unit_id\",\"next_pathway_unit_id\",\"save_point\",\"course_certificate_id\"]}},\"default_batching_eligible_lessons\":null,\"is_default_pathway\":true}]},\"query\":\"mutation upsertCoursePathway($updatedData: [course_course_pathways_insert_input!]!) {\\n  course: insert_course_course_pathways(objects: $updatedData, on_conflict: {constraint: course_pathways_pkey, update_columns: [title, starting_pathway_unit_id, total_expected_classes, total_classes, is_floating, is_default_pathway, default_batching_eligible_lessons]}) {\\n    returning {\\n      id\\n      title\\n      __typename\\n    }\\n    __typename\\n  }\\n}\\n\"}",
+    "method": "POST",
+    "mode": "cors",
+    "credentials": "include"
+  });
+
+  {
+	"operationName":"upsertCoursePathway",
+	"variables":{
+		"updatedData":[
+			{
+				"id":"343c85cc-ab75-47a9-bfec-496a98f8ecd3",
+				"course_id":"8a1618dd-f2b6-4170-bad1-ed41994760bf",
+				"title":"P1",
+				"is_floating":false,
+				"total_classes":3,
+				"total_expected_classes":141,
+				"pathway_unit":{
+					"data":{
+						"id":"2ae9dab8-01b7-48e4-aeb7-ac4c84b807e6",
+						"unit_id":"ac4bfa46-d2c5-4866-a481-3cc7e7c729df",
+						"next_unit":{
+							"data":{
+								"id":"f0139428-0a5a-44a5-904e-dad31d43e471",
+								"unit_id":"0b0b312e-731f-45cc-8f62-62b59347af2e",
+								"next_unit":{
+									"data":{
+										"unit_id":"b5b5c7a7-eb5a-4114-a1a5-ef795009c883",
+										"save_point":null,
+										"certificate":null,
+										"transition_points":{
+											"data":[
+												
+											],
+											"on_conflict":{
+												"constraint":"course_transition_points_source_course_pathway_unit_id_targ_key",
+												"update_columns":[
+													"is_active"
+												]
+											}
+										}
+									},
+									"on_conflict":{
+										"constraint":"pathway_units_pkey",
+										"update_columns":[
+											"unit_id",
+											"next_pathway_unit_id",
+											"save_point",
+											"course_certificate_id"
+										]
+									}
+								},
+								"save_point":null,
+								"certificate":null,
+								"transition_points":{
+									"data":[
+										
+									],
+									"on_conflict":{
+										"constraint":"course_transition_points_source_course_pathway_unit_id_targ_key",
+										"update_columns":[
+											"is_active"
+										]
+									}
+								}
+							},
+							"on_conflict":{
+								"constraint":"pathway_units_pkey",
+								"update_columns":[
+									"unit_id",
+									"next_pathway_unit_id",
+									"save_point",
+									"course_certificate_id"
+								]
+							}
+						},
+						"save_point":null,
+						"certificate":null,
+						"transition_points":{
+							"data":[
+								
+							],
+							"on_conflict":{
+								"constraint":"course_transition_points_source_course_pathway_unit_id_targ_key",
+								"update_columns":[
+									"is_active"
+								]
+							}
+						}
+					},
+					"on_conflict":{
+						"constraint":"pathway_units_pkey",
+						"update_columns":[
+							"unit_id",
+							"next_pathway_unit_id",
+							"save_point",
+							"course_certificate_id"
+						]
+					}
+				},
+				"default_batching_eligible_lessons":null,
+				"is_default_pathway":true
+			}
+		]
+	},
+	"query":"mutation upsertCoursePathway($updatedData: [course_course_pathways_insert_input!]!) {\\n  course: insert_course_course_pathways(objects: $updatedData, on_conflict: {constraint: course_pathways_pkey, update_columns: [title, starting_pathway_unit_id, total_expected_classes, total_classes, is_floating, is_default_pathway, default_batching_eligible_lessons]}) {\\n    returning {\\n      id\\n      title\\n      __typename\\n    }\\n    __typename\\n  }\\n}\\n"
+}
+
+---
+
+fetch("https://hasuraapi.lidolearning.com/v1/graphql", {
+    "headers": {
+      "accept": "*/*",
+      "accept-language": "en-GB,en-US;q=0.9,en;q=0.8",
+      "authorization": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJiMDFlMjgxMi04YjU4LTQ5ZGUtYjVmOS1kMWQ5ODdlNDJlNjYiLCJuYW1lIjoiUHJpeWEgVmFpc2giLCJyb2xlcyI6WyJsaWJyYXJ5LWFkbWluIiwiY291cnNlLWFkbWluIiwibGlicmFyeS1yZWFkIiwibG8tcmVhZCIsInZjLXJlYWQiLCJjb3Vyc2UtcmVhZCIsInFiLWFkbWluIiwicWItZWRpdG9yIiwicXVpei1hZG1pbiIsInF1aXotZWRpdG9yIiwicnVicmljLWFkbWluIiwicWItdmlkZW8tYWRtaW4iLCJxYi1yZWFkIiwicXVpei1yZWFkIiwicWItdmlkZW8tcmVhZCIsInJ1YnJpYy1yZWFkIl0sImh0dHBzOi8vaGFzdXJhLmlvL2p3dC9jbGFpbXMiOnsieC1oYXN1cmEtYWxsb3dlZC1yb2xlcyI6WyJsaWJyYXJ5LWFkbWluIiwiY291cnNlLWFkbWluIiwibGlicmFyeS1yZWFkIiwibG8tcmVhZCIsInZjLXJlYWQiLCJjb3Vyc2UtcmVhZCIsInFiLWFkbWluIiwicWItZWRpdG9yIiwicXVpei1hZG1pbiIsInF1aXotZWRpdG9yIiwicnVicmljLWFkbWluIiwicWItdmlkZW8tYWRtaW4iLCJxYi1yZWFkIiwicXVpei1yZWFkIiwicWItdmlkZW8tcmVhZCIsInJ1YnJpYy1yZWFkIl0sIngtaGFzdXJhLWRlZmF1bHQtcm9sZSI6ImxpYnJhcnktYWRtaW4iLCJ4LWhhc3VyYS11c2VyLWlkIjoiYjAxZTI4MTItOGI1OC00OWRlLWI1ZjktZDFkOTg3ZTQyZTY2IiwieC1oYXN1cmEtb3JnLWlkIjoibGlkb2xlYXJuaW5nIn0sImlhdCI6MTYzMTc3NjU1MywiZXhwIjoxNjMxNzc4MzUzfQ.Y3qv4lWrtI4BC6ponKz_oHle6tm_W1EXDevr-ML_VPM",
+      "cache-control": "no-cache",
+      "content-type": "application/json",
+      "pragma": "no-cache",
+      "sec-ch-ua": "\"Google Chrome\";v=\"93\", \" Not;A Brand\";v=\"99\", \"Chromium\";v=\"93\"",
+      "sec-ch-ua-mobile": "?0",
+      "sec-ch-ua-platform": "\"Linux\"",
+      "sec-fetch-dest": "empty",
+      "sec-fetch-mode": "cors",
+      "sec-fetch-site": "same-site",
+      "x-hasura-role": "course-admin"
+    },
+    "referrer": "https://admincontent.lidolearning.com/",
+    "referrerPolicy": "strict-origin-when-cross-origin",
+    "body": "{\"operationName\":\"upsertCoursePathway\",\"variables\":{\"updatedData\":[{\"id\":\"343c85cc-ab75-47a9-bfec-496a98f8ecd3\",\"course_id\":\"8a1618dd-f2b6-4170-bad1-ed41994760bf\",\"title\":\"P1\",\"is_floating\":false,\"total_classes\":6,\"total_expected_classes\":141,\"pathway_unit\":{\"data\":{\"id\":\"2ae9dab8-01b7-48e4-aeb7-ac4c84b807e6\",\"unit_id\":\"ac4bfa46-d2c5-4866-a481-3cc7e7c729df\",\"next_unit\":{\"data\":{\"id\":\"f0139428-0a5a-44a5-904e-dad31d43e471\",\"unit_id\":\"0b0b312e-731f-45cc-8f62-62b59347af2e\",\"next_unit\":{\"data\":{\"id\":\"466d086e-5ff0-4da4-8107-5f2e1d2da8eb\",\"unit_id\":\"b5b5c7a7-eb5a-4114-a1a5-ef795009c883\",\"next_unit\":{\"data\":{\"id\":\"c346c321-ea0e-48c1-acac-4f59fbeaf10d\",\"unit_id\":\"12602d80-34a0-4625-b724-75ec068caa4d\",\"next_unit\":{\"data\":{\"unit_id\":\"c3e2b6e8-2a02-4e23-b16a-fc9b4366514c\",\"next_unit\":{\"data\":{\"unit_id\":\"da5c1d9e-c20d-434d-9c97-e883d2d7366a\",\"save_point\":null,\"certificate\":null,\"transition_points\":{\"data\":[],\"on_conflict\":{\"constraint\":\"course_transition_points_source_course_pathway_unit_id_targ_key\",\"update_columns\":[\"is_active\"]}}},\"on_conflict\":{\"constraint\":\"pathway_units_pkey\",\"update_columns\":[\"unit_id\",\"next_pathway_unit_id\",\"save_point\",\"course_certificate_id\"]}},\"save_point\":null,\"certificate\":null,\"transition_points\":{\"data\":[],\"on_conflict\":{\"constraint\":\"course_transition_points_source_course_pathway_unit_id_targ_key\",\"update_columns\":[\"is_active\"]}}},\"on_conflict\":{\"constraint\":\"pathway_units_pkey\",\"update_columns\":[\"unit_id\",\"next_pathway_unit_id\",\"save_point\",\"course_certificate_id\"]}},\"save_point\":null,\"certificate\":null,\"transition_points\":{\"data\":[],\"on_conflict\":{\"constraint\":\"course_transition_points_source_course_pathway_unit_id_targ_key\",\"update_columns\":[\"is_active\"]}}},\"on_conflict\":{\"constraint\":\"pathway_units_pkey\",\"update_columns\":[\"unit_id\",\"next_pathway_unit_id\",\"save_point\",\"course_certificate_id\"]}},\"save_point\":null,\"certificate\":null,\"transition_points\":{\"data\":[],\"on_conflict\":{\"constraint\":\"course_transition_points_source_course_pathway_unit_id_targ_key\",\"update_columns\":[\"is_active\"]}}},\"on_conflict\":{\"constraint\":\"pathway_units_pkey\",\"update_columns\":[\"unit_id\",\"next_pathway_unit_id\",\"save_point\",\"course_certificate_id\"]}},\"save_point\":null,\"certificate\":null,\"transition_points\":{\"data\":[],\"on_conflict\":{\"constraint\":\"course_transition_points_source_course_pathway_unit_id_targ_key\",\"update_columns\":[\"is_active\"]}}},\"on_conflict\":{\"constraint\":\"pathway_units_pkey\",\"update_columns\":[\"unit_id\",\"next_pathway_unit_id\",\"save_point\",\"course_certificate_id\"]}},\"save_point\":null,\"certificate\":null,\"transition_points\":{\"data\":[],\"on_conflict\":{\"constraint\":\"course_transition_points_source_course_pathway_unit_id_targ_key\",\"update_columns\":[\"is_active\"]}}},\"on_conflict\":{\"constraint\":\"pathway_units_pkey\",\"update_columns\":[\"unit_id\",\"next_pathway_unit_id\",\"save_point\",\"course_certificate_id\"]}},\"default_batching_eligible_lessons\":null,\"is_default_pathway\":true}]},\"query\":\"mutation upsertCoursePathway($updatedData: [course_course_pathways_insert_input!]!) {\\n  course: insert_course_course_pathways(objects: $updatedData, on_conflict: {constraint: course_pathways_pkey, update_columns: [title, starting_pathway_unit_id, total_expected_classes, total_classes, is_floating, is_default_pathway, default_batching_eligible_lessons]}) {\\n    returning {\\n      id\\n      title\\n      __typename\\n    }\\n    __typename\\n  }\\n}\\n\"}",
+    "method": "POST",
+    "mode": "cors",
+    "credentials": "include"
+  });
+
+  {
+	"operationName":"upsertCoursePathway",
+	"variables":{
+		"updatedData":[
+			{
+				"id":"343c85cc-ab75-47a9-bfec-496a98f8ecd3",
+				"course_id":"8a1618dd-f2b6-4170-bad1-ed41994760bf",
+				"title":"P1",
+				"is_floating":false,
+				"total_classes":6,
+				"total_expected_classes":141,
+				"pathway_unit":{
+					"data":{
+						"id":"2ae9dab8-01b7-48e4-aeb7-ac4c84b807e6",
+						"unit_id":"ac4bfa46-d2c5-4866-a481-3cc7e7c729df",
+						"next_unit":{
+							"data":{
+								"id":"f0139428-0a5a-44a5-904e-dad31d43e471",
+								"unit_id":"0b0b312e-731f-45cc-8f62-62b59347af2e",
+								"next_unit":{
+									"data":{
+										"id":"466d086e-5ff0-4da4-8107-5f2e1d2da8eb",
+										"unit_id":"b5b5c7a7-eb5a-4114-a1a5-ef795009c883",
+										"next_unit":{
+											"data":{
+												"id":"c346c321-ea0e-48c1-acac-4f59fbeaf10d",
+												"unit_id":"12602d80-34a0-4625-b724-75ec068caa4d",
+												"next_unit":{
+													"data":{
+														"unit_id":"c3e2b6e8-2a02-4e23-b16a-fc9b4366514c",
+														"next_unit":{
+															"data":{
+																"unit_id":"da5c1d9e-c20d-434d-9c97-e883d2d7366a",
+																"save_point":null,
+																"certificate":null,
+																"transition_points":{
+																	"data":[
+																		
+																	],
+																	"on_conflict":{
+																		"constraint":"course_transition_points_source_course_pathway_unit_id_targ_key",
+																		"update_columns":[
+																			"is_active"
+																		]
+																	}
+																}
+															},
+															"on_conflict":{
+																"constraint":"pathway_units_pkey",
+																"update_columns":[
+																	"unit_id",
+																	"next_pathway_unit_id",
+																	"save_point",
+																	"course_certificate_id"
+																]
+															}
+														},
+														"save_point":null,
+														"certificate":null,
+														"transition_points":{
+															"data":[
+																
+															],
+															"on_conflict":{
+																"constraint":"course_transition_points_source_course_pathway_unit_id_targ_key",
+																"update_columns":[
+																	"is_active"
+																]
+															}
+														}
+													},
+													"on_conflict":{
+														"constraint":"pathway_units_pkey",
+														"update_columns":[
+															"unit_id",
+															"next_pathway_unit_id",
+															"save_point",
+															"course_certificate_id"
+														]
+													}
+												},
+												"save_point":null,
+												"certificate":null,
+												"transition_points":{
+													"data":[
+														
+													],
+													"on_conflict":{
+														"constraint":"course_transition_points_source_course_pathway_unit_id_targ_key",
+														"update_columns":[
+															"is_active"
+														]
+													}
+												}
+											},
+											"on_conflict":{
+												"constraint":"pathway_units_pkey",
+												"update_columns":[
+													"unit_id",
+													"next_pathway_unit_id",
+													"save_point",
+													"course_certificate_id"
+												]
+											}
+										},
+										"save_point":null,
+										"certificate":null,
+										"transition_points":{
+											"data":[
+												
+											],
+											"on_conflict":{
+												"constraint":"course_transition_points_source_course_pathway_unit_id_targ_key",
+												"update_columns":[
+													"is_active"
+												]
+											}
+										}
+									},
+									"on_conflict":{
+										"constraint":"pathway_units_pkey",
+										"update_columns":[
+											"unit_id",
+											"next_pathway_unit_id",
+											"save_point",
+											"course_certificate_id"
+										]
+									}
+								},
+								"save_point":null,
+								"certificate":null,
+								"transition_points":{
+									"data":[
+										
+									],
+									"on_conflict":{
+										"constraint":"course_transition_points_source_course_pathway_unit_id_targ_key",
+										"update_columns":[
+											"is_active"
+										]
+									}
+								}
+							},
+							"on_conflict":{
+								"constraint":"pathway_units_pkey",
+								"update_columns":[
+									"unit_id",
+									"next_pathway_unit_id",
+									"save_point",
+									"course_certificate_id"
+								]
+							}
+						},
+						"save_point":null,
+						"certificate":null,
+						"transition_points":{
+							"data":[
+								
+							],
+							"on_conflict":{
+								"constraint":"course_transition_points_source_course_pathway_unit_id_targ_key",
+								"update_columns":[
+									"is_active"
+								]
+							}
+						}
+					},
+					"on_conflict":{
+						"constraint":"pathway_units_pkey",
+						"update_columns":[
+							"unit_id",
+							"next_pathway_unit_id",
+							"save_point",
+							"course_certificate_id"
+						]
+					}
+				},
+				"default_batching_eligible_lessons":null,
+				"is_default_pathway":true
+			}
+		]
+	},
+	"query":"mutation upsertCoursePathway($updatedData: [course_course_pathways_insert_input!]!) {\\n  course: insert_course_course_pathways(objects: $updatedData, on_conflict: {constraint: course_pathways_pkey, update_columns: [title, starting_pathway_unit_id, total_expected_classes, total_classes, is_floating, is_default_pathway, default_batching_eligible_lessons]}) {\\n    returning {\\n      id\\n      title\\n      __typename\\n    }\\n    __typename\\n  }\\n}\\n"
+}

@@ -1,0 +1,397 @@
+fetch("https://hasuraapi.lidolearning.com/v1/graphql", {
+  "headers": {
+    "accept": "*/*",
+    "accept-language": "en-GB,en-US;q=0.9,en;q=0.8",
+    "authorization": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJiMDFlMjgxMi04YjU4LTQ5ZGUtYjVmOS1kMWQ5ODdlNDJlNjYiLCJuYW1lIjoiUHJpeWEgVmFpc2giLCJyb2xlcyI6WyJsaWJyYXJ5LWFkbWluIiwiY291cnNlLWFkbWluIiwibGlicmFyeS1yZWFkIiwibG8tcmVhZCIsInZjLXJlYWQiLCJjb3Vyc2UtcmVhZCIsInFiLWFkbWluIiwicWItZWRpdG9yIiwicXVpei1hZG1pbiIsInF1aXotZWRpdG9yIiwicnVicmljLWFkbWluIiwicWItdmlkZW8tYWRtaW4iLCJxYi1yZWFkIiwicXVpei1yZWFkIiwicWItdmlkZW8tcmVhZCIsInJ1YnJpYy1yZWFkIl0sImh0dHBzOi8vaGFzdXJhLmlvL2p3dC9jbGFpbXMiOnsieC1oYXN1cmEtYWxsb3dlZC1yb2xlcyI6WyJsaWJyYXJ5LWFkbWluIiwiY291cnNlLWFkbWluIiwibGlicmFyeS1yZWFkIiwibG8tcmVhZCIsInZjLXJlYWQiLCJjb3Vyc2UtcmVhZCIsInFiLWFkbWluIiwicWItZWRpdG9yIiwicXVpei1hZG1pbiIsInF1aXotZWRpdG9yIiwicnVicmljLWFkbWluIiwicWItdmlkZW8tYWRtaW4iLCJxYi1yZWFkIiwicXVpei1yZWFkIiwicWItdmlkZW8tcmVhZCIsInJ1YnJpYy1yZWFkIl0sIngtaGFzdXJhLWRlZmF1bHQtcm9sZSI6ImxpYnJhcnktYWRtaW4iLCJ4LWhhc3VyYS11c2VyLWlkIjoiYjAxZTI4MTItOGI1OC00OWRlLWI1ZjktZDFkOTg3ZTQyZTY2IiwieC1oYXN1cmEtb3JnLWlkIjoibGlkb2xlYXJuaW5nIn0sImlhdCI6MTYzMTc3NDA3NCwiZXhwIjoxNjMxNzc1ODc0fQ.p4vVhASdvgIllhiUlMmq8cdd3bb1cGxaL5WZpBSo5KQ",
+    "cache-control": "no-cache",
+    "content-type": "application/json",
+    "pragma": "no-cache",
+    "sec-ch-ua": "\"Google Chrome\";v=\"93\", \" Not;A Brand\";v=\"99\", \"Chromium\";v=\"93\"",
+    "sec-ch-ua-mobile": "?0",
+    "sec-ch-ua-platform": "\"Linux\"",
+    "sec-fetch-dest": "empty",
+    "sec-fetch-mode": "cors",
+    "sec-fetch-site": "same-site",
+    "x-hasura-role": "course-admin"
+  },
+  "referrer": "https://admincontent.lidolearning.com/",
+  "referrerPolicy": "strict-origin-when-cross-origin",
+  "body": "{\"operationName\":\"upsertCourse\",\"variables\":{\"course\":{\"id\":\"8a1618dd-f2b6-4170-bad1-ed41994760bf\",\"is_active\":false,\"board_id\":\"3\",\"slug\":\"M_7_ME\",\"subject_id\":\"1\",\"behaviour_id\":\"1\",\"title\":\"Math Grade 7 - Middle East\",\"display_title\":\"Math\",\"description\":\"Infer formulas, don't memorise them, identify the visual approach to math. Improve your calculation speed through Mental Math and be the champion of strategy through some cool logic and reasoning lessons!\",\"type_id\":\"1\",\"total_expected_classes\":\"141\",\"start_date\":\"2021-03-25T18:30:00.000Z\",\"no_of_skip_lessons\":null,\"no_of_repeat_lessons\":null,\"grades\":{\"data\":[{\"grade_id\":7,\"is_active\":true}],\"on_conflict\":{\"constraint\":\"course_grades_course_id_grade_id_key\",\"update_columns\":\"is_active\"}},\"recorded_videos\":{\"data\":[],\"on_conflict\":{\"constraint\":\"course_recorded_videos_course_id_recorded_video_id_key\",\"update_columns\":[\"is_active\",\"sort_order\"]}},\"content_units\":{\"data\":[{\"unit_id\":\"ac4bfa46-d2c5-4866-a481-3cc7e7c729df\",\"sort_order\":1,\"is_active\":true},{\"unit_id\":\"0b0b312e-731f-45cc-8f62-62b59347af2e\",\"sort_order\":2,\"is_active\":true}],\"on_conflict\":{\"constraint\":\"course_content_units_course_id_unit_id_key\",\"update_columns\":[\"sort_order\",\"is_active\"]}},\"domains\":{\"data\":[{\"domain_id\":\"649e4a16-f7e7-436b-8a55-5c9ccbca42e8\",\"is_active\":true}],\"on_conflict\":{\"constraint\":\"domain_courses_course_id_domain_id_key\",\"update_columns\":[\"is_active\"]}},\"regions\":{\"data\":[{\"region_slug\":\"MIDDLE_EAST\",\"is_active\":true}],\"on_conflict\":{\"constraint\":\"course_regions_course_id_region_slug_key\",\"update_columns\":[\"is_active\"]}}},\"deletePathwayIds\":[]},\"query\":\"mutation upsertCourse($course: course_courses_insert_input!, $deletePathwayIds: [uuid!]) {\\n  course: insert_course_courses(objects: [$course], on_conflict: {constraint: courses_pkey, update_columns: [description, display_title, board_id, subject_id, title, start_date, no_of_skip_lessons, no_of_repeat_lessons, type_id, total_expected_classes, default_batching_eligible_lessons, title, is_active, is_repeatable, unit_duration_in_mins]}) {\\n    returning {\\n      id\\n      __typename\\n    }\\n    __typename\\n  }\\n  update_course_course_pathways(where: {id: {_in: $deletePathwayIds}}, _set: {is_active: false}) {\\n    returning {\\n      id\\n      __typename\\n    }\\n    __typename\\n  }\\n}\\n\"}",
+  "method": "POST",
+  "mode": "cors",
+  "credentials": "include"
+});
+
+{
+	"operationName":"upsertCourse",
+	"variables":{
+		"course":{
+			"id":"8a1618dd-f2b6-4170-bad1-ed41994760bf",
+			"is_active":false,
+			"board_id":"3",
+			"slug":"M_7_ME",
+			"subject_id":"1",
+			"behaviour_id":"1",
+			"title":"Math Grade 7 - Middle East",
+			"display_title":"Math",
+			"description":"Infer formulas, don't memorise them, identify the visual approach to math. Improve your calculation speed through Mental Math and be the champion of strategy through some cool logic and reasoning lessons!",
+			"type_id":"1",
+			"total_expected_classes":"141",
+			"start_date":"2021-03-25T18:30:00.000Z",
+			"no_of_skip_lessons":null,
+			"no_of_repeat_lessons":null,
+			"grades":{
+				"data":[
+					{
+						"grade_id":7,
+						"is_active":true
+					}
+				],
+				"on_conflict":{
+					"constraint":"course_grades_course_id_grade_id_key",
+					"update_columns":"is_active"
+				}
+			},
+			"recorded_videos":{
+				"data":[
+					
+				],
+				"on_conflict":{
+					"constraint":"course_recorded_videos_course_id_recorded_video_id_key",
+					"update_columns":[
+						"is_active",
+						"sort_order"
+					]
+				}
+			},
+			"content_units":{
+				"data":[
+					{
+						"unit_id":"ac4bfa46-d2c5-4866-a481-3cc7e7c729df",
+						"sort_order":1,
+						"is_active":true
+					},
+					{
+						"unit_id":"0b0b312e-731f-45cc-8f62-62b59347af2e",
+						"sort_order":2,
+						"is_active":true
+					}
+				],
+				"on_conflict":{
+					"constraint":"course_content_units_course_id_unit_id_key",
+					"update_columns":[
+						"sort_order",
+						"is_active"
+					]
+				}
+			},
+			"domains":{
+				"data":[
+					{
+						"domain_id":"649e4a16-f7e7-436b-8a55-5c9ccbca42e8",
+						"is_active":true
+					}
+				],
+				"on_conflict":{
+					"constraint":"domain_courses_course_id_domain_id_key",
+					"update_columns":[
+						"is_active"
+					]
+				}
+			},
+			"regions":{
+				"data":[
+					{
+						"region_slug":"MIDDLE_EAST",
+						"is_active":true
+					}
+				],
+				"on_conflict":{
+					"constraint":"course_regions_course_id_region_slug_key",
+					"update_columns":[
+						"is_active"
+					]
+				}
+			}
+		},
+		"deletePathwayIds":[
+			
+		]
+	},
+	"query":"mutation upsertCourse($course: course_courses_insert_input!, $deletePathwayIds: [uuid!]) {\\n  course: insert_course_courses(objects: [$course], on_conflict: {constraint: courses_pkey, update_columns: [description, display_title, board_id, subject_id, title, start_date, no_of_skip_lessons, no_of_repeat_lessons, type_id, total_expected_classes, default_batching_eligible_lessons, title, is_active, is_repeatable, unit_duration_in_mins]}) {\\n    returning {\\n      id\\n      __typename\\n    }\\n    __typename\\n  }\\n  update_course_course_pathways(where: {id: {_in: $deletePathwayIds}}, _set: {is_active: false}) {\\n    returning {\\n      id\\n      __typename\\n    }\\n    __typename\\n  }\\n}\\n"
+}
+
+---
+
+fetch("https://hasuraapi.lidolearning.com/v1/graphql", {
+    "headers": {
+      "accept": "*/*",
+      "accept-language": "en-GB,en-US;q=0.9,en;q=0.8",
+      "authorization": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJiMDFlMjgxMi04YjU4LTQ5ZGUtYjVmOS1kMWQ5ODdlNDJlNjYiLCJuYW1lIjoiUHJpeWEgVmFpc2giLCJyb2xlcyI6WyJsaWJyYXJ5LWFkbWluIiwiY291cnNlLWFkbWluIiwibGlicmFyeS1yZWFkIiwibG8tcmVhZCIsInZjLXJlYWQiLCJjb3Vyc2UtcmVhZCIsInFiLWFkbWluIiwicWItZWRpdG9yIiwicXVpei1hZG1pbiIsInF1aXotZWRpdG9yIiwicnVicmljLWFkbWluIiwicWItdmlkZW8tYWRtaW4iLCJxYi1yZWFkIiwicXVpei1yZWFkIiwicWItdmlkZW8tcmVhZCIsInJ1YnJpYy1yZWFkIl0sImh0dHBzOi8vaGFzdXJhLmlvL2p3dC9jbGFpbXMiOnsieC1oYXN1cmEtYWxsb3dlZC1yb2xlcyI6WyJsaWJyYXJ5LWFkbWluIiwiY291cnNlLWFkbWluIiwibGlicmFyeS1yZWFkIiwibG8tcmVhZCIsInZjLXJlYWQiLCJjb3Vyc2UtcmVhZCIsInFiLWFkbWluIiwicWItZWRpdG9yIiwicXVpei1hZG1pbiIsInF1aXotZWRpdG9yIiwicnVicmljLWFkbWluIiwicWItdmlkZW8tYWRtaW4iLCJxYi1yZWFkIiwicXVpei1yZWFkIiwicWItdmlkZW8tcmVhZCIsInJ1YnJpYy1yZWFkIl0sIngtaGFzdXJhLWRlZmF1bHQtcm9sZSI6ImxpYnJhcnktYWRtaW4iLCJ4LWhhc3VyYS11c2VyLWlkIjoiYjAxZTI4MTItOGI1OC00OWRlLWI1ZjktZDFkOTg3ZTQyZTY2IiwieC1oYXN1cmEtb3JnLWlkIjoibGlkb2xlYXJuaW5nIn0sImlhdCI6MTYzMTc3NTI3OCwiZXhwIjoxNjMxNzc3MDc4fQ.kFv7nHJfxOzL3XwjnhTzMvhV97SrNP5mmCedsj_f5v4",
+      "cache-control": "no-cache",
+      "content-type": "application/json",
+      "pragma": "no-cache",
+      "sec-ch-ua": "\"Google Chrome\";v=\"93\", \" Not;A Brand\";v=\"99\", \"Chromium\";v=\"93\"",
+      "sec-ch-ua-mobile": "?0",
+      "sec-ch-ua-platform": "\"Linux\"",
+      "sec-fetch-dest": "empty",
+      "sec-fetch-mode": "cors",
+      "sec-fetch-site": "same-site",
+      "x-hasura-role": "course-admin"
+    },
+    "referrer": "https://admincontent.lidolearning.com/",
+    "referrerPolicy": "strict-origin-when-cross-origin",
+    "body": "{\"operationName\":\"upsertCourse\",\"variables\":{\"course\":{\"id\":\"8a1618dd-f2b6-4170-bad1-ed41994760bf\",\"is_active\":false,\"board_id\":\"3\",\"slug\":\"M_7_ME\",\"subject_id\":\"1\",\"behaviour_id\":\"1\",\"title\":\"Math Grade 7 - Middle East\",\"display_title\":\"Math\",\"description\":\"Infer formulas, don't memorise them, identify the visual approach to math. Improve your calculation speed through Mental Math and be the champion of strategy through some cool logic and reasoning lessons!\",\"type_id\":\"1\",\"total_expected_classes\":\"141\",\"start_date\":\"2021-03-25T18:30:00.000Z\",\"no_of_skip_lessons\":null,\"no_of_repeat_lessons\":null,\"grades\":{\"data\":[{\"grade_id\":7,\"is_active\":true}],\"on_conflict\":{\"constraint\":\"course_grades_course_id_grade_id_key\",\"update_columns\":\"is_active\"}},\"recorded_videos\":{\"data\":[],\"on_conflict\":{\"constraint\":\"course_recorded_videos_course_id_recorded_video_id_key\",\"update_columns\":[\"is_active\",\"sort_order\"]}},\"content_units\":{\"data\":[{\"unit_id\":\"ac4bfa46-d2c5-4866-a481-3cc7e7c729df\",\"sort_order\":1,\"is_active\":true},{\"unit_id\":\"0b0b312e-731f-45cc-8f62-62b59347af2e\",\"sort_order\":2,\"is_active\":true},{\"unit_id\":\"b5b5c7a7-eb5a-4114-a1a5-ef795009c883\",\"sort_order\":3,\"is_active\":true}],\"on_conflict\":{\"constraint\":\"course_content_units_course_id_unit_id_key\",\"update_columns\":[\"sort_order\",\"is_active\"]}},\"domains\":{\"data\":[{\"domain_id\":\"649e4a16-f7e7-436b-8a55-5c9ccbca42e8\",\"is_active\":true}],\"on_conflict\":{\"constraint\":\"domain_courses_course_id_domain_id_key\",\"update_columns\":[\"is_active\"]}},\"regions\":{\"data\":[{\"region_slug\":\"MIDDLE_EAST\",\"is_active\":true}],\"on_conflict\":{\"constraint\":\"course_regions_course_id_region_slug_key\",\"update_columns\":[\"is_active\"]}}},\"deletePathwayIds\":[]},\"query\":\"mutation upsertCourse($course: course_courses_insert_input!, $deletePathwayIds: [uuid!]) {\\n  course: insert_course_courses(objects: [$course], on_conflict: {constraint: courses_pkey, update_columns: [description, display_title, board_id, subject_id, title, start_date, no_of_skip_lessons, no_of_repeat_lessons, type_id, total_expected_classes, default_batching_eligible_lessons, title, is_active, is_repeatable, unit_duration_in_mins]}) {\\n    returning {\\n      id\\n      __typename\\n    }\\n    __typename\\n  }\\n  update_course_course_pathways(where: {id: {_in: $deletePathwayIds}}, _set: {is_active: false}) {\\n    returning {\\n      id\\n      __typename\\n    }\\n    __typename\\n  }\\n}\\n\"}",
+    "method": "POST",
+    "mode": "cors",
+    "credentials": "include"
+  });
+
+  {
+	"operationName":"upsertCourse",
+	"variables":{
+		"course":{
+			"id":"8a1618dd-f2b6-4170-bad1-ed41994760bf",
+			"is_active":false,
+			"board_id":"3",
+			"slug":"M_7_ME",
+			"subject_id":"1",
+			"behaviour_id":"1",
+			"title":"Math Grade 7 - Middle East",
+			"display_title":"Math",
+			"description":"Infer formulas, don't memorise them, identify the visual approach to math. Improve your calculation speed through Mental Math and be the champion of strategy through some cool logic and reasoning lessons!",
+			"type_id":"1",
+			"total_expected_classes":"141",
+			"start_date":"2021-03-25T18:30:00.000Z",
+			"no_of_skip_lessons":null,
+			"no_of_repeat_lessons":null,
+			"grades":{
+				"data":[
+					{
+						"grade_id":7,
+						"is_active":true
+					}
+				],
+				"on_conflict":{
+					"constraint":"course_grades_course_id_grade_id_key",
+					"update_columns":"is_active"
+				}
+			},
+			"recorded_videos":{
+				"data":[
+					
+				],
+				"on_conflict":{
+					"constraint":"course_recorded_videos_course_id_recorded_video_id_key",
+					"update_columns":[
+						"is_active",
+						"sort_order"
+					]
+				}
+			},
+			"content_units":{
+				"data":[
+					{
+						"unit_id":"ac4bfa46-d2c5-4866-a481-3cc7e7c729df",
+						"sort_order":1,
+						"is_active":true
+					},
+					{
+						"unit_id":"0b0b312e-731f-45cc-8f62-62b59347af2e",
+						"sort_order":2,
+						"is_active":true
+					},
+					{
+						"unit_id":"b5b5c7a7-eb5a-4114-a1a5-ef795009c883",
+						"sort_order":3,
+						"is_active":true
+					}
+				],
+				"on_conflict":{
+					"constraint":"course_content_units_course_id_unit_id_key",
+					"update_columns":[
+						"sort_order",
+						"is_active"
+					]
+				}
+			},
+			"domains":{
+				"data":[
+					{
+						"domain_id":"649e4a16-f7e7-436b-8a55-5c9ccbca42e8",
+						"is_active":true
+					}
+				],
+				"on_conflict":{
+					"constraint":"domain_courses_course_id_domain_id_key",
+					"update_columns":[
+						"is_active"
+					]
+				}
+			},
+			"regions":{
+				"data":[
+					{
+						"region_slug":"MIDDLE_EAST",
+						"is_active":true
+					}
+				],
+				"on_conflict":{
+					"constraint":"course_regions_course_id_region_slug_key",
+					"update_columns":[
+						"is_active"
+					]
+				}
+			}
+		},
+		"deletePathwayIds":[
+			
+		]
+	},
+	"query":"mutation upsertCourse($course: course_courses_insert_input!, $deletePathwayIds: [uuid!]) {\\n  course: insert_course_courses(objects: [$course], on_conflict: {constraint: courses_pkey, update_columns: [description, display_title, board_id, subject_id, title, start_date, no_of_skip_lessons, no_of_repeat_lessons, type_id, total_expected_classes, default_batching_eligible_lessons, title, is_active, is_repeatable, unit_duration_in_mins]}) {\\n    returning {\\n      id\\n      __typename\\n    }\\n    __typename\\n  }\\n  update_course_course_pathways(where: {id: {_in: $deletePathwayIds}}, _set: {is_active: false}) {\\n    returning {\\n      id\\n      __typename\\n    }\\n    __typename\\n  }\\n}\\n"
+}
+
+---
+
+fetch("https://hasuraapi.lidolearning.com/v1/graphql", {
+    "headers": {
+      "accept": "*/*",
+      "accept-language": "en-GB,en-US;q=0.9,en;q=0.8",
+      "authorization": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJiMDFlMjgxMi04YjU4LTQ5ZGUtYjVmOS1kMWQ5ODdlNDJlNjYiLCJuYW1lIjoiUHJpeWEgVmFpc2giLCJyb2xlcyI6WyJsaWJyYXJ5LWFkbWluIiwiY291cnNlLWFkbWluIiwibGlicmFyeS1yZWFkIiwibG8tcmVhZCIsInZjLXJlYWQiLCJjb3Vyc2UtcmVhZCIsInFiLWFkbWluIiwicWItZWRpdG9yIiwicXVpei1hZG1pbiIsInF1aXotZWRpdG9yIiwicnVicmljLWFkbWluIiwicWItdmlkZW8tYWRtaW4iLCJxYi1yZWFkIiwicXVpei1yZWFkIiwicWItdmlkZW8tcmVhZCIsInJ1YnJpYy1yZWFkIl0sImh0dHBzOi8vaGFzdXJhLmlvL2p3dC9jbGFpbXMiOnsieC1oYXN1cmEtYWxsb3dlZC1yb2xlcyI6WyJsaWJyYXJ5LWFkbWluIiwiY291cnNlLWFkbWluIiwibGlicmFyeS1yZWFkIiwibG8tcmVhZCIsInZjLXJlYWQiLCJjb3Vyc2UtcmVhZCIsInFiLWFkbWluIiwicWItZWRpdG9yIiwicXVpei1hZG1pbiIsInF1aXotZWRpdG9yIiwicnVicmljLWFkbWluIiwicWItdmlkZW8tYWRtaW4iLCJxYi1yZWFkIiwicXVpei1yZWFkIiwicWItdmlkZW8tcmVhZCIsInJ1YnJpYy1yZWFkIl0sIngtaGFzdXJhLWRlZmF1bHQtcm9sZSI6ImxpYnJhcnktYWRtaW4iLCJ4LWhhc3VyYS11c2VyLWlkIjoiYjAxZTI4MTItOGI1OC00OWRlLWI1ZjktZDFkOTg3ZTQyZTY2IiwieC1oYXN1cmEtb3JnLWlkIjoibGlkb2xlYXJuaW5nIn0sImlhdCI6MTYzMTc3NjU1MywiZXhwIjoxNjMxNzc4MzUzfQ.Y3qv4lWrtI4BC6ponKz_oHle6tm_W1EXDevr-ML_VPM",
+      "cache-control": "no-cache",
+      "content-type": "application/json",
+      "pragma": "no-cache",
+      "sec-ch-ua": "\"Google Chrome\";v=\"93\", \" Not;A Brand\";v=\"99\", \"Chromium\";v=\"93\"",
+      "sec-ch-ua-mobile": "?0",
+      "sec-ch-ua-platform": "\"Linux\"",
+      "sec-fetch-dest": "empty",
+      "sec-fetch-mode": "cors",
+      "sec-fetch-site": "same-site",
+      "x-hasura-role": "course-admin"
+    },
+    "referrer": "https://admincontent.lidolearning.com/",
+    "referrerPolicy": "strict-origin-when-cross-origin",
+    "body": "{\"operationName\":\"upsertCourse\",\"variables\":{\"course\":{\"id\":\"8a1618dd-f2b6-4170-bad1-ed41994760bf\",\"is_active\":false,\"board_id\":\"3\",\"slug\":\"M_7_ME\",\"subject_id\":\"1\",\"behaviour_id\":\"1\",\"title\":\"Math Grade 7 - Middle East\",\"display_title\":\"Math\",\"description\":\"Infer formulas, don't memorise them, identify the visual approach to math. Improve your calculation speed through Mental Math and be the champion of strategy through some cool logic and reasoning lessons!\",\"type_id\":\"1\",\"total_expected_classes\":\"141\",\"start_date\":\"2021-03-25T18:30:00.000Z\",\"no_of_skip_lessons\":null,\"no_of_repeat_lessons\":null,\"grades\":{\"data\":[{\"grade_id\":7,\"is_active\":true}],\"on_conflict\":{\"constraint\":\"course_grades_course_id_grade_id_key\",\"update_columns\":\"is_active\"}},\"recorded_videos\":{\"data\":[],\"on_conflict\":{\"constraint\":\"course_recorded_videos_course_id_recorded_video_id_key\",\"update_columns\":[\"is_active\",\"sort_order\"]}},\"content_units\":{\"data\":[{\"unit_id\":\"ac4bfa46-d2c5-4866-a481-3cc7e7c729df\",\"sort_order\":1,\"is_active\":true},{\"unit_id\":\"0b0b312e-731f-45cc-8f62-62b59347af2e\",\"sort_order\":2,\"is_active\":true},{\"unit_id\":\"b5b5c7a7-eb5a-4114-a1a5-ef795009c883\",\"sort_order\":3,\"is_active\":true},{\"unit_id\":\"12602d80-34a0-4625-b724-75ec068caa4d\",\"sort_order\":4,\"is_active\":true},{\"unit_id\":\"c3e2b6e8-2a02-4e23-b16a-fc9b4366514c\",\"sort_order\":5,\"is_active\":true},{\"unit_id\":\"da5c1d9e-c20d-434d-9c97-e883d2d7366a\",\"sort_order\":6,\"is_active\":true}],\"on_conflict\":{\"constraint\":\"course_content_units_course_id_unit_id_key\",\"update_columns\":[\"sort_order\",\"is_active\"]}},\"domains\":{\"data\":[{\"domain_id\":\"649e4a16-f7e7-436b-8a55-5c9ccbca42e8\",\"is_active\":true}],\"on_conflict\":{\"constraint\":\"domain_courses_course_id_domain_id_key\",\"update_columns\":[\"is_active\"]}},\"regions\":{\"data\":[{\"region_slug\":\"MIDDLE_EAST\",\"is_active\":true}],\"on_conflict\":{\"constraint\":\"course_regions_course_id_region_slug_key\",\"update_columns\":[\"is_active\"]}}},\"deletePathwayIds\":[]},\"query\":\"mutation upsertCourse($course: course_courses_insert_input!, $deletePathwayIds: [uuid!]) {\\n  course: insert_course_courses(objects: [$course], on_conflict: {constraint: courses_pkey, update_columns: [description, display_title, board_id, subject_id, title, start_date, no_of_skip_lessons, no_of_repeat_lessons, type_id, total_expected_classes, default_batching_eligible_lessons, title, is_active, is_repeatable, unit_duration_in_mins]}) {\\n    returning {\\n      id\\n      __typename\\n    }\\n    __typename\\n  }\\n  update_course_course_pathways(where: {id: {_in: $deletePathwayIds}}, _set: {is_active: false}) {\\n    returning {\\n      id\\n      __typename\\n    }\\n    __typename\\n  }\\n}\\n\"}",
+    "method": "POST",
+    "mode": "cors",
+    "credentials": "include"
+  });
+
+  {
+	"operationName":"upsertCourse",
+	"variables":{
+		"course":{
+			"id":"8a1618dd-f2b6-4170-bad1-ed41994760bf",
+			"is_active":false,
+			"board_id":"3",
+			"slug":"M_7_ME",
+			"subject_id":"1",
+			"behaviour_id":"1",
+			"title":"Math Grade 7 - Middle East",
+			"display_title":"Math",
+			"description":"Infer formulas, don't memorise them, identify the visual approach to math. Improve your calculation speed through Mental Math and be the champion of strategy through some cool logic and reasoning lessons!",
+			"type_id":"1",
+			"total_expected_classes":"141",
+			"start_date":"2021-03-25T18:30:00.000Z",
+			"no_of_skip_lessons":null,
+			"no_of_repeat_lessons":null,
+			"grades":{
+				"data":[
+					{
+						"grade_id":7,
+						"is_active":true
+					}
+				],
+				"on_conflict":{
+					"constraint":"course_grades_course_id_grade_id_key",
+					"update_columns":"is_active"
+				}
+			},
+			"recorded_videos":{
+				"data":[
+					
+				],
+				"on_conflict":{
+					"constraint":"course_recorded_videos_course_id_recorded_video_id_key",
+					"update_columns":[
+						"is_active",
+						"sort_order"
+					]
+				}
+			},
+			"content_units":{
+				"data":[
+					{
+						"unit_id":"ac4bfa46-d2c5-4866-a481-3cc7e7c729df",
+						"sort_order":1,
+						"is_active":true
+					},
+					{
+						"unit_id":"0b0b312e-731f-45cc-8f62-62b59347af2e",
+						"sort_order":2,
+						"is_active":true
+					},
+					{
+						"unit_id":"b5b5c7a7-eb5a-4114-a1a5-ef795009c883",
+						"sort_order":3,
+						"is_active":true
+					},
+					{
+						"unit_id":"12602d80-34a0-4625-b724-75ec068caa4d",
+						"sort_order":4,
+						"is_active":true
+					},
+					{
+						"unit_id":"c3e2b6e8-2a02-4e23-b16a-fc9b4366514c",
+						"sort_order":5,
+						"is_active":true
+					},
+					{
+						"unit_id":"da5c1d9e-c20d-434d-9c97-e883d2d7366a",
+						"sort_order":6,
+						"is_active":true
+					}
+				],
+				"on_conflict":{
+					"constraint":"course_content_units_course_id_unit_id_key",
+					"update_columns":[
+						"sort_order",
+						"is_active"
+					]
+				}
+			},
+			"domains":{
+				"data":[
+					{
+						"domain_id":"649e4a16-f7e7-436b-8a55-5c9ccbca42e8",
+						"is_active":true
+					}
+				],
+				"on_conflict":{
+					"constraint":"domain_courses_course_id_domain_id_key",
+					"update_columns":[
+						"is_active"
+					]
+				}
+			},
+			"regions":{
+				"data":[
+					{
+						"region_slug":"MIDDLE_EAST",
+						"is_active":true
+					}
+				],
+				"on_conflict":{
+					"constraint":"course_regions_course_id_region_slug_key",
+					"update_columns":[
+						"is_active"
+					]
+				}
+			}
+		},
+		"deletePathwayIds":[
+			
+		]
+	},
+	"query":"mutation upsertCourse($course: course_courses_insert_input!, $deletePathwayIds: [uuid!]) {\\n  course: insert_course_courses(objects: [$course], on_conflict: {constraint: courses_pkey, update_columns: [description, display_title, board_id, subject_id, title, start_date, no_of_skip_lessons, no_of_repeat_lessons, type_id, total_expected_classes, default_batching_eligible_lessons, title, is_active, is_repeatable, unit_duration_in_mins]}) {\\n    returning {\\n      id\\n      __typename\\n    }\\n    __typename\\n  }\\n  update_course_course_pathways(where: {id: {_in: $deletePathwayIds}}, _set: {is_active: false}) {\\n    returning {\\n      id\\n      __typename\\n    }\\n    __typename\\n  }\\n}\\n"
+}

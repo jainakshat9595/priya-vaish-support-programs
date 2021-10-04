@@ -1,0 +1,116 @@
+Fill in the blanks
+------
+fetch("https://hasuraapi.lidolearning.com/v1/graphql", {
+  "headers": {
+    "accept": "*/*",
+    "accept-language": "en-GB,en-US;q=0.9,en;q=0.8",
+    "authorization": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJiMDFlMjgxMi04YjU4LTQ5ZGUtYjVmOS1kMWQ5ODdlNDJlNjYiLCJuYW1lIjoiUHJpeWEgVmFpc2giLCJyb2xlcyI6WyJsaWJyYXJ5LXJlYWQiLCJsby1yZWFkIiwidmMtcmVhZCIsImNvdXJzZS1yZWFkIiwicWItYWRtaW4iLCJxYi1lZGl0b3IiLCJxdWl6LWFkbWluIiwicXVpei1lZGl0b3IiLCJydWJyaWMtYWRtaW4iLCJxYi12aWRlby1hZG1pbiIsInFiLXJlYWQiLCJxdWl6LXJlYWQiLCJxYi12aWRlby1yZWFkIiwicnVicmljLXJlYWQiXSwiaHR0cHM6Ly9oYXN1cmEuaW8vand0L2NsYWltcyI6eyJ4LWhhc3VyYS1hbGxvd2VkLXJvbGVzIjpbImxpYnJhcnktcmVhZCIsImxvLXJlYWQiLCJ2Yy1yZWFkIiwiY291cnNlLXJlYWQiLCJxYi1hZG1pbiIsInFiLWVkaXRvciIsInF1aXotYWRtaW4iLCJxdWl6LWVkaXRvciIsInJ1YnJpYy1hZG1pbiIsInFiLXZpZGVvLWFkbWluIiwicWItcmVhZCIsInF1aXotcmVhZCIsInFiLXZpZGVvLXJlYWQiLCJydWJyaWMtcmVhZCJdLCJ4LWhhc3VyYS1kZWZhdWx0LXJvbGUiOiJsaWJyYXJ5LXJlYWQiLCJ4LWhhc3VyYS11c2VyLWlkIjoiYjAxZTI4MTItOGI1OC00OWRlLWI1ZjktZDFkOTg3ZTQyZTY2IiwieC1oYXN1cmEtb3JnLWlkIjoibGlkb2xlYXJuaW5nIn0sImlhdCI6MTYzMTQzODc5NywiZXhwIjoxNjMxNDQwNTk3fQ.eq4T1zuoZYalvVSnOQ2HGSm1_jy_COm4-OB5e28Tzmk",
+    "content-type": "application/json",
+    "sec-ch-ua": "\"Google Chrome\";v=\"93\", \" Not;A Brand\";v=\"99\", \"Chromium\";v=\"93\"",
+    "sec-ch-ua-mobile": "?0",
+    "sec-ch-ua-platform": "\"Linux\"",
+    "sec-fetch-dest": "empty",
+    "sec-fetch-mode": "cors",
+    "sec-fetch-site": "same-site",
+    "x-hasura-role": "qb-editor"
+  },
+  "referrer": "https://adminqb.lidolearning.com/",
+  "referrerPolicy": "strict-origin-when-cross-origin",
+  "body": "{\"operationName\":\"upsertQuestion\",\"variables\":{\"question\":{\"status_id\":1,\"difficulty_level_id\":2,\"format_id\":\"fib\",\"type_id\":2,\"rubric_id\":\"\",\"hint\":\"\",\"solution\":\"\",\"slug_id\":\"dummy_lo_4\",\"text\":\"This is a dummy question. Please ignore this question. Format \\\\_\\\\_\\\\_\\\\_\\\\_\\\\_\\\\_ Fill in the blanks Type abstract\",\"widgets\":[],\"steps\":[],\"options\":[{\"text\":\"qwerty\",\"isCorrect\":true,\"floor\":null,\"ceil\":null}],\"is_partial_marking\":false,\"question_image\":null,\"question_learning_outcomes\":{\"data\":[{\"learning_outcome_id\":\"dummy_lo\",\"is_active\":true}],\"on_conflict\":{\"constraint\":\"question_learning_outcomes_question_id_learning_outcome_id_key\",\"update_columns\":\"is_active\"}},\"board_grades\":{\"data\":[{\"grade_id\":5,\"board_id\":1,\"is_active\":true}],\"on_conflict\":{\"constraint\":\"question_board_grades_question_id_board_id_grade_id_key\",\"update_columns\":\"is_active\"}},\"question_reviews\":{\"data\":[{\"creator_id\":\"b01e2812-8b58-49de-b5f9-d1d987e42e66\",\"reviewer_id\":\"deaf7980-1b29-418c-8295-9c87bef545bd\",\"num_times_rejected\":0}],\"on_conflict\":{\"constraint\":\"question_review_track_question_id_key\",\"update_columns\":[\"creator_id\",\"reviewer_id\",\"num_times_rejected\"]}},\"comments\":{\"data\":[],\"on_conflict\":{\"constraint\":\"question_comments_id_key\",\"update_columns\":[\"comment_text\",\"comment_status_id\"]}},\"source_id\":1},\"exercise\":{\"question_slug\":\"dummy_lo_4\",\"sort_order\":-1}},\"query\":\"mutation upsertQuestion($question: question_bank_questions_insert_input!, $exercise: question_bank_qb_exercise_questions_insert_input!) {\\n  operation: insert_question_bank_questions(objects: [$question], on_conflict: {constraint: questions_id_key, update_columns: [difficulty_level_id, format_id, hint, solution, options, status_id, steps, text, type_id, rubric_id, widgets, is_partial_marking, question_image]}) {\\n    returning {\\n      id\\n      slug_id\\n      __typename\\n    }\\n    __typename\\n  }\\n  insert_question_bank_qb_exercise_questions(objects: [$exercise], on_conflict: {constraint: qb_exercise_questions_question_slug_key, update_columns: [exercise_id, sort_order]}) {\\n    returning {\\n      question_slug\\n      id\\n      __typename\\n    }\\n    __typename\\n  }\\n}\\n\"}",
+  "method": "POST",
+  "mode": "cors",
+  "credentials": "include"
+});
+---
+{
+    "operationName":"upsertQuestion",
+    "variables":{
+       "question":{
+          "status_id":1,
+          "difficulty_level_id":2,
+          "format_id":"fib",
+          "type_id":2,
+          "rubric_id":"",
+          "hint":"",
+          "solution":"",
+          "slug_id":"dummy_lo_4",
+          "text":"This is a dummy question. Please ignore this question. Format \\\\_\\\\_\\\\_\\\\_\\\\_\\\\_\\\\_ Fill in the blanks Type abstract",
+          "widgets":[
+             
+          ],
+          "steps":[
+             
+          ],
+          "options":[
+             {
+                "text":"qwerty",
+                "isCorrect":true,
+                "floor":null,
+                "ceil":null
+             }
+          ],
+          "is_partial_marking":false,
+          "question_image":null,
+          "question_learning_outcomes":{
+             "data":[
+                {
+                   "learning_outcome_id":"dummy_lo",
+                   "is_active":true
+                }
+             ],
+             "on_conflict":{
+                "constraint":"question_learning_outcomes_question_id_learning_outcome_id_key",
+                "update_columns":"is_active"
+             }
+          },
+          "board_grades":{
+             "data":[
+                {
+                   "grade_id":5,
+                   "board_id":1,
+                   "is_active":true
+                }
+             ],
+             "on_conflict":{
+                "constraint":"question_board_grades_question_id_board_id_grade_id_key",
+                "update_columns":"is_active"
+             }
+          },
+          "question_reviews":{
+             "data":[
+                {
+                   "creator_id":"b01e2812-8b58-49de-b5f9-d1d987e42e66",
+                   "reviewer_id":"deaf7980-1b29-418c-8295-9c87bef545bd",
+                   "num_times_rejected":0
+                }
+             ],
+             "on_conflict":{
+                "constraint":"question_review_track_question_id_key",
+                "update_columns":[
+                   "creator_id",
+                   "reviewer_id",
+                   "num_times_rejected"
+                ]
+             }
+          },
+          "comments":{
+             "data":[
+                
+             ],
+             "on_conflict":{
+                "constraint":"question_comments_id_key",
+                "update_columns":[
+                   "comment_text",
+                   "comment_status_id"
+                ]
+             }
+          },
+          "source_id":1
+       },
+       "exercise":{
+          "question_slug":"dummy_lo_4",
+          "sort_order":-1
+       }
+    },
+    "query":"mutation upsertQuestion($question: question_bank_questions_insert_input!, $exercise: question_bank_qb_exercise_questions_insert_input!) {\\n  operation: insert_question_bank_questions(objects: [$question], on_conflict: {constraint: questions_id_key, update_columns: [difficulty_level_id, format_id, hint, solution, options, status_id, steps, text, type_id, rubric_id, widgets, is_partial_marking, question_image]}) {\\n    returning {\\n      id\\n      slug_id\\n      __typename\\n    }\\n    __typename\\n  }\\n  insert_question_bank_qb_exercise_questions(objects: [$exercise], on_conflict: {constraint: qb_exercise_questions_question_slug_key, update_columns: [exercise_id, sort_order]}) {\\n    returning {\\n      question_slug\\n      id\\n      __typename\\n    }\\n    __typename\\n  }\\n}\\n"
+ }

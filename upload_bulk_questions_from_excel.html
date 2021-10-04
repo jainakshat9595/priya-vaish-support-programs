@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<style>
+			table {
+			  font-family: arial, sans-serif;
+			  border-collapse: collapse;
+			  width: 100%;
+			}
+
+			td, th {
+			  border: 1px solid #dddddd;
+			  text-align: left;
+			  padding: 8px;
+			}
+
+			tr:nth-child(even) {
+			  background-color: #dddddd;
+			}
+		</style>
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.8.0/jszip.js"></script>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.8.0/xlsx.js"></script>
+	</head>
+	<body>
+		<input
+			id="jwt-token"
+			placeholder="Token"
+			value=""
+		/>
+		<input
+			id="file-uploader"
+			type=file
+			name="files[]"
+		>
+		<!-- <button id="start-btn" onchange="start();">Start</button> -->
+		<div id="result-div"></div>
+	</body>
+	<script>
+
+		const jMap = ['B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J'];
+
+		const uploadQuestion = requestBody => {
+			
+			const token = document.getElementById('jwt-token').value;
+			
+			fetch("https://hasuraapi.lidolearning.com/v1/graphql", {
+				"headers": {
+					"accept": "*/*",
+					"accept-language": "en-GB,en-US;q=0.9,en;q=0.8",
+					"authorization": "Bearer "+token,
+					"content-type": "application/json",
+					"sec-ch-ua": "\"Chromium\";v=\"92\", \" Not A;Brand\";v=\"99\", \"Google Chrome\";v=\"92\"",
+					"sec-ch-ua-mobile": "?0",
+					"sec-fetch-dest": "empty",
+					"sec-fetch-mode": "cors",
+					"sec-fetch-site": "cross-site",
+					"x-hasura-role": "qb-editor"
+				},
+				// "referrer": "https://adminqb.lidolearning.com/",
+				"referrerPolicy": "strict-origin-when-cross-origin",
+				"body": JSON.stringify(requestBody),
+				"method": "POST",
+				"mode": "cors",
+				"credentials": "include"
+			})
+			.then(res => res.json())
+			.then(res => {
+				console.log(res);
+				// if(res.errors) {
+				// 	alert(res.errors[0].message);
+				// } else {
+				// 	alert('Done!');
+				// 	document.getElementById(rowId).style.backgroundColor = 'green';
+				// }
+			})
+			.catch(e => {
+				console.log(e);
+			});
+		}
+
+		const start = event1 => {
+
+			document.getElementById("result-div").innerHTML = '';
+
+			const allFiles = event1.target.files;
+			const targetFile = allFiles[0];
+
+			var reader = new FileReader();
+			reader.onerror = exception => console.log(exception);
+			reader.onload = event2 => {
+				const readExcelFile = XLSX.read(event2.target.result, {
+					type: 'binary'
+				});
+				const worksheetObj = readExcelFile.Sheets['Questions for uploading'];
+				console.log(worksheetObj);
+				// startI = 4; endI = x
+				// startJ = B; endJ = J
+
+				for(let i = 9; i <= 21; i++) {
+					let options = [];
+					switch(worksheetObj[`C${i}`].h) {
+						case 'scq':
+							options.push({
+								"text":worksheetObj[`J${i}`].h,
+								"isCorrect":worksheetObj[`K${i}`].h === 'true',
+								"floor":null,
+								"ceil":null
+							});
+							options.push({
+								"text":worksheetObj[`L${i}`].h,
+								"isCorrect":worksheetObj[`M${i}`].h === 'true',
+								"floor":null,
+								"ceil":null
+							});
+							options.push({
+								"text":worksheetObj[`N${i}`].h,
+								"isCorrect":worksheetObj[`O${i}`].h === 'true',
+								"floor":null,
+								"ceil":null
+							});
+							options.push({
+								"text":worksheetObj[`P${i}`].h,
+								"isCorrect":worksheetObj[`Q${i}`].h === 'true',
+								"floor":null,
+								"ceil":null
+							});
+						break;
+
+						case 'fib':
+							options.push({
+								"text":worksheetObj[`J${i}`].h,
+								"isCorrect":worksheetObj[`K${i}`].h === 'true',
+								"floor":null,
+								"ceil":null
+							});
+						break;
+
+						case 'boolean':
+							options.push({
+								"text":worksheetObj[`J${i}`].h,
+								"isCorrect":worksheetObj[`K${i}`].h === 'true',
+								"floor":null,
+								"ceil":null
+							});
+							options.push({
+								"text":worksheetObj[`L${i}`].h,
+								"isCorrect":worksheetObj[`M${i}`].h === 'true',
+								"floor":null,
+								"ceil":null
+							});
+						break;
+					}
+					const requestBody = {
+						"operationName":"upsertQuestion",
+						"variables":{
+							"question":{
+								"status_id":1,
+								"difficulty_level_id":parseInt(worksheetObj[`B${i}`].h),
+								"format_id":worksheetObj[`C${i}`].h,
+								"type_id":2,
+								"rubric_id":"",
+								"hint":"",
+								"solution":"",
+								"slug_id":worksheetObj[`D${i}`].h,
+								"text":worksheetObj[`E${i}`].h,
+								"widgets":[],
+								"steps":[],
+								"options":options,
+								"is_partial_marking":false,
+								"question_image":null,
+								"question_learning_outcomes":{
+									"data":[
+										{
+											"learning_outcome_id":worksheetObj[`F${i}`].h,
+											"is_active":true
+										}
+									],
+									"on_conflict":{
+										"constraint":"question_learning_outcomes_question_id_learning_outcome_id_key",
+										"update_columns":"is_active"
+									}
+								},
+								"board_grades":{
+									"data":[
+										{
+											"grade_id":parseInt(worksheetObj[`G${i}`].h),
+											"board_id":parseInt(worksheetObj[`H${i}`].h),
+											"is_active":true
+										}
+									],
+									"on_conflict":{
+										"constraint":"question_board_grades_question_id_board_id_grade_id_key",
+										"update_columns":"is_active"
+									}
+								},
+								"question_reviews":{
+									"data":[
+										{
+											"creator_id":"b01e2812-8b58-49de-b5f9-d1d987e42e66",
+											"reviewer_id":worksheetObj[`I${i}`].h,
+											"num_times_rejected":0
+										}
+									],
+									"on_conflict":{
+										"constraint":"question_review_track_question_id_key",
+										"update_columns":[
+											"creator_id",
+											"reviewer_id",
+											"num_times_rejected"
+										]
+									}
+								},
+								"comments":{
+									"data":[
+										
+									],
+									"on_conflict":{
+										"constraint":"question_comments_id_key",
+										"update_columns":[
+										"comment_text",
+										"comment_status_id"
+										]
+									}
+								},
+								"source_id":1
+							},
+							"exercise":{
+								"question_slug":worksheetObj[`D${i}`].h,
+								"sort_order":-1
+							}
+						},
+						"query":"mutation upsertQuestion($question: question_bank_questions_insert_input!, $exercise: question_bank_qb_exercise_questions_insert_input!) {\n  operation: insert_question_bank_questions(objects: [$question], on_conflict: {constraint: questions_id_key, update_columns: [difficulty_level_id, format_id, hint, solution, options, status_id, steps, text, type_id, rubric_id, widgets, is_partial_marking, question_image]}) {\n    returning {\n      id\n      slug_id\n      __typename\n    }\n    __typename\n  }\n  insert_question_bank_qb_exercise_questions(objects: [$exercise], on_conflict: {constraint: qb_exercise_questions_question_slug_key, update_columns: [exercise_id, sort_order]}) {\n    returning {\n      question_slug\n      id\n      __typename\n    }\n    __typename\n  }\n}\n"
+					};
+
+					// console.log(requestBody);
+					uploadQuestion(requestBody);
+				}
+
+			};
+			reader.readAsBinaryString(targetFile);
+
+		}
+
+		document.getElementById('file-uploader').addEventListener('change', start, false);
+
+	</script>
+</html>

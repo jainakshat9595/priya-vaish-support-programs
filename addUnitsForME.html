@@ -1,0 +1,1181 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<style>
+			table {
+			  font-family: arial, sans-serif;
+			  border-collapse: collapse;
+			  width: 100%;
+			}
+
+			td, th {
+			  border: 1px solid #dddddd;
+			  text-align: left;
+			  padding: 8px;
+			}
+
+			tr:nth-child(even) {
+			  background-color: #dddddd;
+			}
+		</style>
+	</head>
+	<body>
+		<input
+			id="jwt-token"
+			placeholder="Token"
+			value=""
+		/>
+		<button id="send-btn" onclick="start();">Start</button>
+		<div id="result-div"></div>
+	</body>
+	<script>
+
+		const source = [
+			{
+				"id": "4a3b3664-3571-40bb-ae7c-e54445b2239e",
+				"slug": "M_9_ME_U_1_1",
+				"title": "Escape Room",
+				"__typename": "course_units"
+			},
+			{
+				"id": "65173e0f-92d1-4c65-8b25-da2ce16a2b28",
+				"slug": "M_9_ME_U_2_1",
+				"title": "Revisiting Rational Numbers",
+				"__typename": "course_units"
+			},
+			{
+				"id": "85600b62-eba5-4e0b-addc-3e7b0071e07c",
+				"slug": "M_9_ME_U_2_2",
+				"title": "Rational Numbers in Decimal Form",
+				"__typename": "course_units"
+			},
+			{
+				"id": "370ee0f1-ba6a-4f5d-8075-eafe0f49134c",
+				"slug": "M_9_ME_U_2_3",
+				"title": "Introduction to Irrational Numbers",
+				"__typename": "course_units"
+			},
+			{
+				"id": "a1a46c85-0022-4010-85ea-a23de207a944",
+				"slug": "M_9_ME_U_2_4",
+				"title": "Properties of Irrational Numbers",
+				"__typename": "course_units"
+			},
+			{
+				"id": "384ee982-2f39-4009-9b0a-577b0477d88e",
+				"slug": "M_9_ME_U_2_5",
+				"title": "Operations on Real Numbers",
+				"__typename": "course_units"
+			},
+			{
+				"id": "05b60b3c-9bd7-4049-9198-08e94ebebfdb",
+				"slug": "M_9_ME_U_2_6",
+				"title": "Rationalisation of Irrational Denominators",
+				"__typename": "course_units"
+			},
+			{
+				"id": "67213a33-f02f-430a-9a33-5760d99ba427",
+				"slug": "M_9_ME_U_2_7",
+				"title": "Rational and Irrational Numbers: Workout",
+				"__typename": "course_units"
+			},
+			{
+				"id": "02e34fe1-7e86-497c-8861-3e7bd86a7eaa",
+				"slug": "M_9_ME_U_2_8",
+				"title": "Number System: Milestone Test",
+				"__typename": "course_units"
+			},
+			{
+				"id": "75086ec7-b7f2-40ed-98ac-ac7a3d3536ad",
+				"slug": "M_9_ME_U_3_1",
+				"title": "Fractional Exponents & Laws",
+				"__typename": "course_units"
+			},
+			{
+				"id": "34c10768-16af-49cc-be20-945d36f992ec",
+				"slug": "M_9_ME_U_3_2",
+				"title": "Laws of Exponents: Workout",
+				"__typename": "course_units"
+			},
+			{
+				"id": "36fac53e-3c0a-4bb2-a146-0b54baba4534",
+				"slug": "M_9_ME_U_3_3",
+				"title": "Fractional Exponents and Laws of Exponents: Milestone Test",
+				"__typename": "course_units"
+			},
+			{
+				"id": "f34660c1-ba29-4ea1-9b5f-224a220f36db",
+				"slug": "M_9_ME_U_3_4",
+				"title": "Parent Teacher Meeting",
+				"__typename": "course_units"
+			},
+			{
+				"id": "fe5d1cf1-6ab9-4960-ba0d-363147f6f6b9",
+				"slug": "M_9_ME_U_4_1",
+				"title": "Magical Multiplications",
+				"__typename": "course_units"
+			},
+			{
+				"id": "4f5e7c00-ba08-42af-b2f8-e20279894d64",
+				"slug": "M_9_ME_U_5_1",
+				"title": "Revisiting Polynomials",
+				"__typename": "course_units"
+			},
+			{
+				"id": "613c48fc-446b-48e5-bece-8d7be41a7413",
+				"slug": "M_9_ME_U_5_2",
+				"title": "Zeroes of a Polynomial",
+				"__typename": "course_units"
+			},
+			{
+				"id": "08958305-67ed-4cda-aac1-81891a797c42",
+				"slug": "M_9_ME_U_5_3",
+				"title": "Remainder Theorem and Factor Theorem",
+				"__typename": "course_units"
+			},
+			{
+				"id": "33efe084-7fdd-4b10-b227-896ab12f5d13",
+				"slug": "M_9_ME_U_5_4",
+				"title": "Remainder Theorem and Factor Theorem: Workout",
+				"__typename": "course_units"
+			},
+			{
+				"id": "6c298e0a-c2ad-4af1-a417-a6f27766fa18",
+				"slug": "M_9_ME_U_5_5",
+				"title": "Factorisation by Applying Factor Theorem",
+				"__typename": "course_units"
+			},
+			{
+				"id": "cbf2b5cf-b191-43de-aa17-14791887d43a",
+				"slug": "M_9_ME_U_5_6",
+				"title": "Polynomials: Milestone Test",
+				"__typename": "course_units"
+			},
+			{
+				"id": "74155c1d-b02c-46cb-9327-e7d7b6981f88",
+				"slug": "M_9_ME_U_6_1",
+				"title": "Algebraic Identities - 1",
+				"__typename": "course_units"
+			},
+			{
+				"id": "a0d91106-546f-437d-b83f-60e30cbfac4b",
+				"slug": "M_9_ME_U_6_8",
+				"title": "Algebraic Identities: Group Learning",
+				"__typename": "course_units"
+			},
+			{
+				"id": "af7ec8f2-43bc-49c7-8fd5-b6a3eb6de7e4",
+				"slug": "M_9_ME_U_6_3",
+				"title": "Algebraic Identities - 2",
+				"__typename": "course_units"
+			},
+			{
+				"id": "4cef972a-a877-43cd-ae94-e6969070afac",
+				"slug": "M_9_ME_U_6_4",
+				"title": "Algebraic Identities: Workout",
+				"__typename": "course_units"
+			},
+			{
+				"id": "fa4fc20f-8812-4497-a02a-49f226ef445f",
+				"slug": "M_9_ME_U_6_5",
+				"title": "Algebraic Identities - 3",
+				"__typename": "course_units"
+			},
+			{
+				"id": "4bc44d6c-9ef7-462c-9b9b-18caaa88ecdf",
+				"slug": "M_9_ME_U_6_9",
+				"title": "Algebraic Identities- Part 2: Group Learning",
+				"__typename": "course_units"
+			},
+			{
+				"id": "0b3a329c-edbb-4126-95af-93316ef55987",
+				"slug": "M_9_ME_U_6_2",
+				"title": "Factorisation of Polynomials",
+				"__typename": "course_units"
+			},
+			{
+				"id": "3ac73d10-d4dd-4c0a-8204-fa36527e082e",
+				"slug": "M_9_ME_U_6_10",
+				"title": "Factorisation of Polynomials: Group Learning",
+				"__typename": "course_units"
+			},
+			{
+				"id": "bf651e06-59b2-42dc-aedb-6d062d1047a7",
+				"slug": "M_9_ME_U_6_11",
+				"title": "Factorisation: Workout",
+				"__typename": "course_units"
+			},
+			{
+				"id": "d7e7a171-51de-4138-b11d-fa9a785c2580",
+				"slug": "M_9_ME_U_6_6",
+				"title": "Algebraic Identities and Factorisation: Workout",
+				"__typename": "course_units"
+			},
+			{
+				"id": "cc50c9a1-b157-400c-9921-dbcc15ccc4c4",
+				"slug": "M_9_ME_U_6_7",
+				"title": "Algebraic Identities and Factorisation: Milestone Test",
+				"__typename": "course_units"
+			},
+			{
+				"id": "4d571c7d-0267-415f-ad3e-0d39ae88511a",
+				"slug": "M_9_ME_U_7_1",
+				"title": "Angles and its types",
+				"__typename": "course_units"
+			},
+			{
+				"id": "027d3a4f-3403-4d3e-b1e9-85279acae5ed",
+				"slug": "M_9_ME_U_7_2",
+				"title": "Types of angles and their properties",
+				"__typename": "course_units"
+			},
+			{
+				"id": "32bbda7f-c643-4bf1-8744-06a40d5530ce",
+				"slug": "M_9_ME_U_7_8",
+				"title": "Types of angles: Group Learning",
+				"__typename": "course_units"
+			},
+			{
+				"id": "4469396b-dc13-497e-8489-cdb6731f6978",
+				"slug": "M_9_ME_U_7_3",
+				"title": "Parallel Lines and Associated Angles",
+				"__typename": "course_units"
+			},
+			{
+				"id": "bc9640ab-123e-4682-901d-3e351b1631f3",
+				"slug": "M_9_ME_U_7_4",
+				"title": "Parallel Lines and its Properties: Workout",
+				"__typename": "course_units"
+			},
+			{
+				"id": "7d711c29-7361-413d-8bca-6ce8b614c1e1",
+				"slug": "M_9_ME_U_7_5",
+				"title": "Triangle and its Properties",
+				"__typename": "course_units"
+			},
+			{
+				"id": "357712c8-df50-4930-928b-490f1350344a",
+				"slug": "M_9_ME_U_7_9",
+				"title": "Lines and Triangles: Group Learning",
+				"__typename": "course_units"
+			},
+			{
+				"id": "5493d07e-9301-40f6-a756-022d735b901e",
+				"slug": "M_9_ME_U_7_10",
+				"title": "Angles, Lines and Triangles: Workout",
+				"__typename": "course_units"
+			},
+			{
+				"id": "6688a050-574b-4074-bdae-c9bf40cb0108",
+				"slug": "M_9_ME_U_7_6",
+				"title": "Lines and Angles: Milestone Test ",
+				"__typename": "course_units"
+			},
+			{
+				"id": "51d7f553-c572-44a8-97b5-ef49c159fe0f",
+				"slug": "M_9_ME_U_7_7",
+				"title": "PTM",
+				"__typename": "course_units"
+			},
+			{
+				"id": "fa18babe-a079-42e2-b8ac-71828719a855",
+				"slug": "M_9_ME_U_8_1",
+				"title": "Congruency of Triangles: SAS rule",
+				"__typename": "course_units"
+			},
+			{
+				"id": "395d6510-2ae7-4663-b1a8-b69e8d73a633",
+				"slug": "M_9_ME_U_8_2",
+				"title": "Congruency of Triangles: ASA/AAS rules",
+				"__typename": "course_units"
+			},
+			{
+				"id": "1a47e17d-b13c-4e11-a212-069a6cbb7d1b",
+				"slug": "M_9_ME_U_8_3",
+				"title": "Congruency of Triangles: SSS/RHS rule",
+				"__typename": "course_units"
+			},
+			{
+				"id": "d2e441b6-28e9-4c48-84c9-e94f1feab5e6",
+				"slug": "M_9_ME_U_8_7",
+				"title": "Congruency of Triangles: Workout",
+				"__typename": "course_units"
+			},
+			{
+				"id": "f4704c38-f5cf-4647-8a9e-7dc4d3a59da9",
+				"slug": "M_9_ME_U_8_4",
+				"title": "Isosceles Triangle and its Properties",
+				"__typename": "course_units"
+			},
+			{
+				"id": "792d764e-6044-4708-a1f8-abbe0625eeb6",
+				"slug": "M_9_ME_U_8_8",
+				"title": "Congruency: Group Learning",
+				"__typename": "course_units"
+			},
+			{
+				"id": "aa5cdd96-6093-49ac-aa75-7700f5b29259",
+				"slug": "M_9_ME_U_8_5",
+				"title": "Inequality Relations in a Triangle",
+				"__typename": "course_units"
+			},
+			{
+				"id": "7079b083-4c81-41ce-b714-86c2b3c5fe1f",
+				"slug": "M_9_ME_U_8_6",
+				"title": "Triangles: Workout",
+				"__typename": "course_units"
+			},
+			{
+				"id": "b8f6ab7a-8750-4c63-9ed8-28a48841471c",
+				"slug": "M_9_ME_U_9_1",
+				"title": "Heron's formula",
+				"__typename": "course_units"
+			},
+			{
+				"id": "45c7ee56-e84b-4a57-a664-4174dea78adc",
+				"slug": "M_9_ME_U_9_4",
+				"title": "Heron's Formula: Group Learning",
+				"__typename": "course_units"
+			},
+			{
+				"id": "110fa587-5d3a-40c0-8669-f22fb985b387",
+				"slug": "M_9_ME_U_9_5",
+				"title": "Heron's Formula: Workout",
+				"__typename": "course_units"
+			},
+			{
+				"id": "79d7eb2c-ae7c-46bc-9d5d-6c214e61be2f",
+				"slug": "M_9_ME_U_9_2",
+				"title": "Triangles and Heron's Formula: Milestone Test",
+				"__typename": "course_units"
+			},
+			{
+				"id": "66f6ee47-0bc7-445c-b82c-eeedc8c282de",
+				"slug": "M_9_ME_U_4_2",
+				"title": "Quick Multiplication Strategies",
+				"__typename": "course_units"
+			},
+			{
+				"id": "b95c4a01-0b87-4452-9a91-de76300b87a9",
+				"slug": "M_9_ME_U_9_3",
+				"title": "PTM",
+				"__typename": "course_units"
+			},
+			{
+				"id": "29e8f068-2493-488d-8885-d5a965ab3c14",
+				"slug": "M_9_ME_U_10_1",
+				"title": "Plotting Points in a Cartesian Plane",
+				"__typename": "course_units"
+			},
+			{
+				"id": "d0951af8-6147-4339-bb29-6671255c5c60",
+				"slug": "M_9_ME_U_10_2",
+				"title": "Plotting Points: Group Learning",
+				"__typename": "course_units"
+			},
+			{
+				"id": "bc10b6e1-5553-4e7a-a5e5-12bd8893de5c",
+				"slug": "M_9_ME_U_11_1",
+				"title": "Introduction to Linear Equations in Two Variables",
+				"__typename": "course_units"
+			},
+			{
+				"id": "9f536621-5e76-465a-b828-946d43cd2009",
+				"slug": "M_9_ME_U_11_2",
+				"title": "Solutions of a Linear Equations in Two Variables",
+				"__typename": "course_units"
+			},
+			{
+				"id": "93253116-7fc6-47cf-beb6-03177bcc85ae",
+				"slug": "M_9_ME_U_11_6",
+				"title": "Solution of Linear Equations: Group Learning",
+				"__typename": "course_units"
+			},
+			{
+				"id": "bec3c545-b860-41e9-941a-4701d57261c5",
+				"slug": "M_9_ME_U_11_8",
+				"title": "Solution of Linear Equations: Workout",
+				"__typename": "course_units"
+			},
+			{
+				"id": "4cdb83f6-f3ed-4184-99d9-f0b09d7f873f",
+				"slug": "M_9_ME_U_11_3",
+				"title": "Graphical Solution of Linear Equation in two variables",
+				"__typename": "course_units"
+			},
+			{
+				"id": "a6574221-2fa7-4e61-82e1-a1ce6435f282",
+				"slug": "M_9_ME_U_11_9",
+				"title": "Graphs of Linear Equations: Group Learning",
+				"__typename": "course_units"
+			},
+			{
+				"id": "4db16459-40b9-416f-9b88-be9edc17ef5d",
+				"slug": "M_9_ME_U_11_4",
+				"title": "Lines Parallel to x and y Axis: Workout",
+				"__typename": "course_units"
+			},
+			{
+				"id": "86572bca-c10a-46d2-805b-70ffccd5b185",
+				"slug": "M_9_ME_U_11_5",
+				"title": "Linear Equations in Two Variables: Milestone Test",
+				"__typename": "course_units"
+			},
+			{
+				"id": "101a415c-698a-49c4-ad09-e194cf258454",
+				"slug": "M_9_ME_U_18_1",
+				"title": "Number Systems: Revision",
+				"__typename": "course_units"
+			},
+			{
+				"id": "983910c0-fafe-4c90-a0ee-1cd24af4b5a8",
+				"slug": "M_9_ME_U_18_2",
+				"title": "Exponents and Laws: Revision",
+				"__typename": "course_units"
+			},
+			{
+				"id": "727574a9-fc50-40e4-a1fc-f75ccddc2ff0",
+				"slug": "M_9_ME_U_18_3",
+				"title": "Polynomials: Revision",
+				"__typename": "course_units"
+			},
+			{
+				"id": "a63716a7-8a5a-4c60-b47d-2a0d74eed94b",
+				"slug": "M_9_ME_U_18_4",
+				"title": "Remainder Theorem and Factor Theorem: Revision",
+				"__typename": "course_units"
+			},
+			{
+				"id": "27f3fa2a-4092-41e1-85dc-8f539fb149e8",
+				"slug": "M_9_ME_U_18_5",
+				"title": "Algebraic Identities: Revision",
+				"__typename": "course_units"
+			},
+			{
+				"id": "a46fcc4d-43f9-4f7b-91d2-c1bd9b38f724",
+				"slug": "M_9_ME_U_18_6",
+				"title": "Factorisation: Revision",
+				"__typename": "course_units"
+			},
+			{
+				"id": "8af31a3a-46a2-46ce-8582-91f978502d0c",
+				"slug": "M_9_ME_U_18_7",
+				"title": "Lines and Angles: Revision",
+				"__typename": "course_units"
+			},
+			{
+				"id": "ad92982b-d1d2-4a83-98a5-b4c342ac33a1",
+				"slug": "M_9_ME_U_18_8",
+				"title": "Triangles: Revision",
+				"__typename": "course_units"
+			},
+			{
+				"id": "32d78b64-60e7-4c86-97c8-51549f8b4736",
+				"slug": "M_9_ME_U_18_9",
+				"title": "Areas of Triangles: Revision",
+				"__typename": "course_units"
+			},
+			{
+				"id": "60e27ec3-4c01-49c8-8046-9ba939a2f779",
+				"slug": "M_9_ME_U_18_10",
+				"title": "Linear Equations in Two Variables: Revision",
+				"__typename": "course_units"
+			},
+			{
+				"id": "d431984b-e1c2-4be1-8bd7-2016fb0454aa",
+				"slug": "M_9_ME_U_11_7",
+				"title": "PTM",
+				"__typename": "course_units"
+			},
+			{
+				"id": "66c86632-0663-498e-9de2-2a15e9af0d84",
+				"slug": "M_9_ME_U_12_1",
+				"title": "Surface Area of Cube and Cuboid",
+				"__typename": "course_units"
+			},
+			{
+				"id": "99d8afe4-bb81-41c2-a70e-8aeef90cd208",
+				"slug": "M_9_ME_U_12_11",
+				"title": "Surface Area: Group Learning",
+				"__typename": "course_units"
+			},
+			{
+				"id": "db1ae7ed-d7c2-40e5-b053-e138b7c91667",
+				"slug": "M_9_ME_U_12_2",
+				"title": "Volume of Cube and cuboids",
+				"__typename": "course_units"
+			},
+			{
+				"id": "0a73b2c3-ed67-4c32-86ae-df483d0edcfb",
+				"slug": "M_9_ME_U_12_12",
+				"title": "Volume: Group Learning",
+				"__typename": "course_units"
+			},
+			{
+				"id": "38d7ab7a-6046-4bbe-866f-f26f77c41ddd",
+				"slug": "M_9_ME_U_12_3",
+				"title": "Surface Area of Cylinder",
+				"__typename": "course_units"
+			},
+			{
+				"id": "26cb22bf-8fa1-4155-b20b-5ea0428dae74",
+				"slug": "M_9_ME_U_12_4",
+				"title": "Volume of a Cylinder",
+				"__typename": "course_units"
+			},
+			{
+				"id": "dfaf3c36-f688-42ca-954d-56052a19a69b",
+				"slug": "M_9_ME_U_12_13",
+				"title": "Cylinder: Group Learning",
+				"__typename": "course_units"
+			},
+			{
+				"id": "e07f077f-c67e-437d-aa65-67a7e3ec7c8d",
+				"slug": "M_9_ME_U_12_5",
+				"title": "Surface Area of a Cone",
+				"__typename": "course_units"
+			},
+			{
+				"id": "1815a0a5-7e9c-4417-8472-b1705638408a",
+				"slug": "M_9_ME_U_12_6",
+				"title": "Volume of a Cone",
+				"__typename": "course_units"
+			},
+			{
+				"id": "0ce59ec1-479d-405f-a11b-b19fbefed54e",
+				"slug": "M_9_ME_U_12_14",
+				"title": "Cone: Group Learning",
+				"__typename": "course_units"
+			},
+			{
+				"id": "bb7d49d8-ac4c-4474-b28a-9039bbe724ea",
+				"slug": "M_9_ME_U_12_7",
+				"title": "Surface Area of a Sphere",
+				"__typename": "course_units"
+			},
+			{
+				"id": "ca3783ff-58ed-4f37-ae38-045dd6572543",
+				"slug": "M_9_ME_U_12_15",
+				"title": "Volume of a Sphere",
+				"__typename": "course_units"
+			},
+			{
+				"id": "9831016d-b53e-49bc-9f9a-c729dd97b99a",
+				"slug": "M_9_ME_U_12_16",
+				"title": "Sphere: Group Learning",
+				"__typename": "course_units"
+			},
+			{
+				"id": "d7576e1a-45b8-4092-ac70-edea939874bc",
+				"slug": "M_9_ME_U_12_8",
+				"title": "Surface Areas and Volumes: Workout 1",
+				"__typename": "course_units"
+			},
+			{
+				"id": "76e1f18d-4d2d-4389-972e-bf6415448a45",
+				"slug": "M_9_ME_U_12_9",
+				"title": "Surface Areas and Volumes: Workout 2",
+				"__typename": "course_units"
+			},
+			{
+				"id": "96eb1ae7-4728-465c-a90b-678814581f37",
+				"slug": "M_9_ME_U_12_10",
+				"title": "Surface Areas and Volumes: Milestone Test",
+				"__typename": "course_units"
+			},
+			{
+				"id": "269aff10-f75c-4812-8951-efd5a1d82536",
+				"slug": "M_9_ME_U_4_3",
+				"title": "Mental Math strategies 3",
+				"__typename": "course_units"
+			},
+			{
+				"id": "0f2c4c61-bd89-4127-93dc-f4b3580e8d54",
+				"slug": "M_9_ME_U_13_1",
+				"title": "Revisiting Constructions",
+				"__typename": "course_units"
+			},
+			{
+				"id": "12975413-e315-4694-b1da-551d82d7c1f1",
+				"slug": "M_9_ME_U_13_5",
+				"title": "Constructions: Group Learning",
+				"__typename": "course_units"
+			},
+			{
+				"id": "25057002-12fe-42f4-bc06-b9078213ac72",
+				"slug": "M_9_ME_U_13_2",
+				"title": "Construction of Triangles",
+				"__typename": "course_units"
+			},
+			{
+				"id": "997ccbcc-3071-4079-9d3f-178b5276a755",
+				"slug": "M_9_ME_U_13_6",
+				"title": "Construction of Triangles: Group Learning",
+				"__typename": "course_units"
+			},
+			{
+				"id": "95f6015d-0c90-46c5-8e0f-a311c05817dc",
+				"slug": "M_9_ME_U_13_4",
+				"title": "PTM",
+				"__typename": "course_units"
+			},
+			{
+				"id": "59770a4e-e1da-4b46-a538-e43abd5b1ec5",
+				"slug": "M_9_ME_U_13_3",
+				"title": "Constructions: Milestone Test",
+				"__typename": "course_units"
+			},
+			{
+				"id": "4ba4121f-fef1-4338-9e5c-a212c7104317",
+				"slug": "M_9_ME_U_14_1",
+				"title": "Revisiting Quadrilaterals",
+				"__typename": "course_units"
+			},
+			{
+				"id": "69422430-ed62-46c4-ae37-049400c625fe",
+				"slug": "M_9_ME_U_14_6",
+				"title": "Quadrilaterals: Group Learning",
+				"__typename": "course_units"
+			},
+			{
+				"id": "4f84e91b-2ac8-45b6-8e46-44bc49c78eb6",
+				"slug": "M_9_ME_U_14_2",
+				"title": "Parallelograms and its Properties",
+				"__typename": "course_units"
+			},
+			{
+				"id": "d5d8ca5a-6962-4e84-9236-bd3d28f3cab4",
+				"slug": "M_9_ME_U_14_7",
+				"title": "Parallelograms: Group Learning",
+				"__typename": "course_units"
+			},
+			{
+				"id": "79959357-6f95-41b6-ba41-b06ad9fc1599",
+				"slug": "M_9_ME_U_14_3",
+				"title": "Properties of a Parallelogram: Applications",
+				"__typename": "course_units"
+			},
+			{
+				"id": "c3ec5d32-883d-4b94-be74-72204fa7cdba",
+				"slug": "M_9_ME_U_14_8",
+				"title": "Application of Parallelograms: Group Learning",
+				"__typename": "course_units"
+			},
+			{
+				"id": "050e9b1e-30d8-462d-b548-f7b55e3a850e",
+				"slug": "M_9_ME_U_14_4",
+				"title": "Parallelograms: Workout",
+				"__typename": "course_units"
+			},
+			{
+				"id": "516a8f76-0352-439c-b111-1ba01ca09f5a",
+				"slug": "M_9_ME_U_15_1",
+				"title": "Mid Point Theorem",
+				"__typename": "course_units"
+			},
+			{
+				"id": "d0adeaaa-634e-4e29-ac5f-f46a9f702daa",
+				"slug": "M_9_ME_U_15_2",
+				"title": "Mid Point Theorem: Work Out",
+				"__typename": "course_units"
+			},
+			{
+				"id": "1ea841c7-1a94-433a-9185-29de73286b05",
+				"slug": "M_9_ME_U_14_5",
+				"title": "Quadrilaterals: Milestone Test",
+				"__typename": "course_units"
+			},
+			{
+				"id": "2029a468-1bb1-40cc-bd90-83cf05dee2ba",
+				"slug": "M_9_ME_U_16_1",
+				"title": "Circles: Basics and Chord Properties",
+				"__typename": "course_units"
+			},
+			{
+				"id": "fffb1ae3-d4d9-423d-a028-b643c581f752",
+				"slug": "M_9_ME_U_16_10",
+				"title": "Chord of a circle: Group Learning",
+				"__typename": "course_units"
+			},
+			{
+				"id": "a04f33a7-4bca-4578-859e-e7b9aa37dcd2",
+				"slug": "M_9_ME_U_16_2",
+				"title": "Properties of Chord of a Circle",
+				"__typename": "course_units"
+			},
+			{
+				"id": "434dab57-e25d-4b0d-885a-507f4cbd2ad8",
+				"slug": "M_9_ME_U_16_3",
+				"title": "Properties of Chord of a Circle: Workout",
+				"__typename": "course_units"
+			},
+			{
+				"id": "0f5dbad3-a624-452e-a005-317ade66b950",
+				"slug": "M_9_ME_U_16_4",
+				"title": "Arc and Angle Properties of a Circle",
+				"__typename": "course_units"
+			},
+			{
+				"id": "a7f86022-02f8-476a-8ddb-1c5dae91c299",
+				"slug": "M_9_ME_U_16_11",
+				"title": "Properties of Chord: Group Learning",
+				"__typename": "course_units"
+			},
+			{
+				"id": "343fb4ce-a6fd-4ddf-96c5-8ef9850a9f87",
+				"slug": "M_9_ME_U_16_5",
+				"title": "Arc and Angle Properties of a Circle: Workout",
+				"__typename": "course_units"
+			},
+			{
+				"id": "bd8603d1-05fc-403e-a104-c58efbd15c94",
+				"slug": "M_9_ME_U_16_12",
+				"title": "Arcs and Angles in a Circle: Group Learning",
+				"__typename": "course_units"
+			},
+			{
+				"id": "8d93d2aa-a360-4c60-9148-2eba52139b6a",
+				"slug": "M_9_ME_U_16_6",
+				"title": "Circles: Workout ",
+				"__typename": "course_units"
+			},
+			{
+				"id": "313f1e99-a2a3-4095-b988-118cb28d652d",
+				"slug": "M_9_ME_U_16_7",
+				"title": "Cyclic Quadrilateral and its Properties",
+				"__typename": "course_units"
+			},
+			{
+				"id": "39ffd909-b0ed-4c6f-bee2-dda9f1564e1f",
+				"slug": "M_9_ME_U_16_8",
+				"title": "Circles and Cyclic Quadrilateral: Milestone Test",
+				"__typename": "course_units"
+			},
+			{
+				"id": "5f111aab-11cc-4a2b-b260-c00a8f209cea",
+				"slug": "M_9_ME_U_16_9",
+				"title": "PTM",
+				"__typename": "course_units"
+			},
+			{
+				"id": "aecb3233-2160-47ee-bd85-b5967aaa5f9e",
+				"slug": "M_9_ME_U_17_1",
+				"title": "Tabulation of Data",
+				"__typename": "course_units"
+			},
+			{
+				"id": "0ed28ec5-a487-4c87-a8f0-85f644403370",
+				"slug": "M_9_ME_U_17_2",
+				"title": "Grouped Frequency Distribution Table",
+				"__typename": "course_units"
+			},
+			{
+				"id": "dc44af32-8ce2-46e8-951a-790dc3d1c086",
+				"slug": "M_9_ME_U_17_6",
+				"title": "Frequency: Group Learning",
+				"__typename": "course_units"
+			},
+			{
+				"id": "47a9fa32-402e-4d99-9cc3-dec1a8c0a316",
+				"slug": "M_9_ME_U_17_7",
+				"title": "Grouped Frequency: Workout",
+				"__typename": "course_units"
+			},
+			{
+				"id": "8269253f-fce4-4781-b4f9-7907ac46cf6d",
+				"slug": "M_9_ME_U_17_3",
+				"title": "Graphical Representation of Data: Bar Graph and Histograms",
+				"__typename": "course_units"
+			},
+			{
+				"id": "939651e6-f149-43d8-92a4-ccc39bf9ab9d",
+				"slug": "M_9_ME_U_17_8",
+				"title": "Graphical Representation of Data: Workout",
+				"__typename": "course_units"
+			},
+			{
+				"id": "dd0a89f7-4aca-4b77-b1c7-212ad4ebd4db",
+				"slug": "M_9_ME_U_17_9",
+				"title": "Graphs and Data: Group Learning",
+				"__typename": "course_units"
+			},
+			{
+				"id": "7d4e9d86-863b-4aaf-a952-92054370fda4",
+				"slug": "M_9_ME_U_17_4",
+				"title": "Probability",
+				"__typename": "course_units"
+			},
+			{
+				"id": "53a3d759-4b57-4e16-b20b-8dfc4b01bbfd",
+				"slug": "M_9_ME_U_17_10",
+				"title": "Probability: Workout",
+				"__typename": "course_units"
+			},
+			{
+				"id": "0bc5b17a-c03c-4be2-8719-7060f3d8e440",
+				"slug": "M_9_ME_U_17_11",
+				"title": "Probability: Group Learning",
+				"__typename": "course_units"
+			},
+			{
+				"id": "f16d4833-4114-46da-84ea-89daeb85e938",
+				"slug": "M_9_ME_U_17_5",
+				"title": "Statistics and Probability: Milestone Test",
+				"__typename": "course_units"
+			},
+			{
+				"id": "0ba300d9-ec88-4393-aaf0-867a8f2558cf",
+				"slug": "M_9_ME_U_4_4",
+				"title": "Mental Math strategies 4",
+				"__typename": "course_units"
+			},
+			{
+				"id": "7ad4d9a0-3ad6-4086-b801-2d8eabf50375",
+				"slug": "M_9_ME_U_17_12",
+				"title": "Statistics: Group Learning",
+				"__typename": "course_units"
+			},
+			{
+				"id": "11e84171-9cb8-48f8-91f2-b2b4a4a225b4",
+				"slug": "M_9_ME_U_19_1",
+				"title": "Surface Areas and Volumes: Revision",
+				"__typename": "course_units"
+			},
+			{
+				"id": "384d3fec-4a94-41f9-b7ff-2f272a071f54",
+				"slug": "M_9_ME_U_19_2",
+				"title": "Constructions: Revision",
+				"__typename": "course_units"
+			},
+			{
+				"id": "2e1a9653-3c8e-4442-9654-eaece13a240d",
+				"slug": "M_9_ME_U_19_3",
+				"title": "Quadrilaterals: Revision",
+				"__typename": "course_units"
+			},
+			{
+				"id": "78e6b414-03de-4e2c-a4e7-b8b4db7040b2",
+				"slug": "M_9_ME_U_19_4",
+				"title": "Mid Point Theorem: Revision",
+				"__typename": "course_units"
+			},
+			{
+				"id": "848e3276-88ba-4d06-a5fb-198afec0f31b",
+				"slug": "M_9_ME_U_19_5",
+				"title": "Circles: Revision",
+				"__typename": "course_units"
+			},
+			{
+				"id": "87682463-7562-43b3-90a9-66f19f54e8f6",
+				"slug": "M_9_ME_U_19_6",
+				"title": "Statistics and Probability: Revision",
+				"__typename": "course_units"
+			},
+			{
+				"id": "65a7f609-31b8-4297-bba3-5a3ebce313b0",
+				"slug": "M_9_ME_U_19_7",
+				"title": "Exam Preparation",
+				"__typename": "course_units"
+			}
+		];
+		
+		const start = () => {
+			// reqTwo();
+			reqThree();			
+		}
+
+		// const reqOne = () => {
+
+		// 	const token = document.getElementById('jwt-token').value;
+
+		// 	const requestBody = {
+		// 		"operationName":"getUnitIsActive",
+		// 		"variables":{
+		// 			"ids":source.map(x => x.id)
+		// 		},
+		// 		"query":"query getUnitIsActive($ids: [uuid!]) {\n  course_units: course_course_units_v2(where: {unit_id: {_in: $ids}}) {\n    course {\n      slug\n      __typename\n    }\n    unit {\n      slug\n      __typename\n    }\n    __typename\n  }\n}\n"
+		// 	};
+
+		// 	// console.log(requestBody);
+
+		// 	fetch("https://hasuraapi.lidolearning.com/v1/graphql", {
+		// 		"headers": {
+		// 			"accept": "*/*",
+		// 			"accept-language": "en-GB,en-US;q=0.9,en;q=0.8",
+		// 			"authorization": "Bearer "+token,
+		// 			"cache-control": "no-cache",
+		// 			"content-type": "application/json",
+		// 			"pragma": "no-cache",
+		// 			"sec-ch-ua": "\"Google Chrome\";v=\"93\", \" Not;A Brand\";v=\"99\", \"Chromium\";v=\"93\"",
+		// 			"sec-ch-ua-mobile": "?0",
+		// 			"sec-ch-ua-platform": "\"Linux\"",
+		// 			"sec-fetch-dest": "empty",
+		// 			"sec-fetch-mode": "cors",
+		// 			"sec-fetch-site": "same-site",
+		// 			"x-hasura-role": "course-admin"
+		// 		},
+		// 		"referrer": "https://admincontent.lidolearning.com/",
+		// 		"referrerPolicy": "strict-origin-when-cross-origin",
+		// 		"body": JSON.stringify(requestBody),
+		// 		"method": "POST",
+		// 		"mode": "cors",
+		// 		"credentials": "include"
+		// 	});
+		// };
+
+		const reqTwo = () => {
+
+			const token = document.getElementById('jwt-token').value;
+
+			const requestBody = {
+				"operationName":"upsertCourse",
+				"variables":{
+					"course":{
+						"id":"fba3b3ff-3283-495a-8636-ef574485f271",
+						"is_active":false,
+						"board_id":"3",
+						"slug":"M_9_ME",
+						"subject_id":"1",
+						"behaviour_id":"1",
+						"title":"Math Grade 9 - Middle East",
+						"display_title":"Math",
+						"description":"Infer formulas, don't memorise them, identify the visual approach to math. Improve your calculation speed through Mental Math and be the champion of strategy through some cool logic and reasoning lessons!",
+						"type_id":"1",
+						"total_expected_classes":"141",
+						"start_date":"2021-03-25T18:30:00.000Z",
+						"no_of_skip_lessons":null,
+						"no_of_repeat_lessons":null,
+						"grades":{
+							"data":[
+								{
+									"grade_id":9,
+									"is_active":true
+								}
+							],
+							"on_conflict":{
+								"constraint":"course_grades_course_id_grade_id_key",
+								"update_columns":"is_active"
+							}
+						},
+						"recorded_videos":{
+							"data":[
+								
+							],
+							"on_conflict":{
+								"constraint":"course_recorded_videos_course_id_recorded_video_id_key",
+								"update_columns":[
+									"is_active",
+									"sort_order"
+								]
+							}
+						},
+						"content_units":{
+							"data":source.map((x, index) => ({
+								"unit_id":x.id,
+								"sort_order":(index+1),
+								"is_active":true
+							})),
+							"on_conflict":{
+								"constraint":"course_content_units_course_id_unit_id_key",
+								"update_columns":[
+									"sort_order",
+									"is_active"
+								]
+							}
+						},
+						"domains":{
+							"data":[
+								{
+									"domain_id":"649e4a16-f7e7-436b-8a55-5c9ccbca42e8",
+									"is_active":true
+								}
+							],
+							"on_conflict":{
+								"constraint":"domain_courses_course_id_domain_id_key",
+								"update_columns":[
+									"is_active"
+								]
+							}
+						},
+						"regions":{
+							"data":[
+								{
+									"region_slug":"MIDDLE_EAST",
+									"is_active":true
+								}
+							],
+							"on_conflict":{
+								"constraint":"course_regions_course_id_region_slug_key",
+								"update_columns":[
+									"is_active"
+								]
+							}
+						}
+					},
+					"deletePathwayIds":[
+						
+					]
+				},
+				"query":"mutation upsertCourse($course: course_courses_insert_input!, $deletePathwayIds: [uuid!]) {\n  course: insert_course_courses(objects: [$course], on_conflict: {constraint: courses_pkey, update_columns: [description, display_title, board_id, subject_id, title, start_date, no_of_skip_lessons, no_of_repeat_lessons, type_id, total_expected_classes, default_batching_eligible_lessons, title, is_active, is_repeatable, unit_duration_in_mins]}) {\n    returning {\n      id\n      __typename\n    }\n    __typename\n  }\n  update_course_course_pathways(where: {id: {_in: $deletePathwayIds}}, _set: {is_active: false}) {\n    returning {\n      id\n      __typename\n    }\n    __typename\n  }\n}\n"
+			};
+
+			// console.log(requestBody);
+
+			fetch("https://hasuraapi.lidolearning.com/v1/graphql", {
+				"headers": {
+					"accept": "*/*",
+					"accept-language": "en-GB,en-US;q=0.9,en;q=0.8",
+					"authorization": "Bearer "+token,
+					"cache-control": "no-cache",
+					"content-type": "application/json",
+					"pragma": "no-cache",
+					"sec-ch-ua": "\"Google Chrome\";v=\"93\", \" Not;A Brand\";v=\"99\", \"Chromium\";v=\"93\"",
+					"sec-ch-ua-mobile": "?0",
+					"sec-ch-ua-platform": "\"Linux\"",
+					"sec-fetch-dest": "empty",
+					"sec-fetch-mode": "cors",
+					"sec-fetch-site": "same-site",
+					"x-hasura-role": "course-admin"
+				},
+				"referrer": "https://admincontent.lidolearning.com/",
+				"referrerPolicy": "strict-origin-when-cross-origin",
+				"body": JSON.stringify(requestBody),
+				"method": "POST",
+				"mode": "cors",
+				"credentials": "include"
+			});
+
+		};
+
+		const hard = [
+			'4cfd9fc1-49bf-4f12-9bc5-e7fbc7685ba6',
+			'd433c140-6e07-4b42-bfdd-9c6822133bd7'
+		];
+		
+		const uuidv4 = (index) => {
+			if(index === 0 || index === 1) {
+				return hard[index];
+			}
+			return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function(c) {
+				var r = Math.random() * 16 | 0, v = c == 'x' ? r : (r & 0x3 | 0x8);
+				return v.toString(16);
+			});
+		}
+
+		const createObj = (index) => {
+			if(index === (source.length-1)) {
+				return {
+					"data":{
+						"unit_id":source[index].id,
+						"save_point":null,
+						"certificate":null,
+						"transition_points":{
+							"data":[
+								
+							],
+							"on_conflict":{
+								"constraint":"course_transition_points_source_course_pathway_unit_id_targ_key",
+								"update_columns":[
+									"is_active"
+								]
+							}
+						}
+					},
+					"on_conflict":{
+						"constraint":"pathway_units_pkey",
+						"update_columns":[
+							"unit_id",
+							"next_pathway_unit_id",
+							"save_point",
+							"course_certificate_id"
+						]
+					}
+				}
+			}
+
+			return {
+				"data":{
+					"id":uuidv4(index),
+					"unit_id":source[index].id,
+					"next_unit":createObj((index+1)),
+					"save_point":null,
+					"certificate":null,
+					"transition_points":{
+						"data":[
+							
+						],
+						"on_conflict":{
+							"constraint":"course_transition_points_source_course_pathway_unit_id_targ_key",
+							"update_columns":[
+								"is_active"
+							]
+						}
+					}
+				},
+				"on_conflict":{
+					"constraint":"pathway_units_pkey",
+					"update_columns":[
+						"unit_id",
+						"next_pathway_unit_id",
+						"save_point",
+						"course_certificate_id"
+					]
+				}
+			};
+
+		}
+
+		const reqThree = () => {
+
+			const token = document.getElementById('jwt-token').value;
+
+			const requestBody = {
+				"operationName":"upsertCoursePathway",
+				"variables":{
+					"updatedData":[
+						{
+							"id":"cf46d3f2-cec6-401b-9ffa-4507c308c776",
+							"course_id":"fba3b3ff-3283-495a-8636-ef574485f271",
+							"title":"P1",
+							"is_floating":false,
+							"total_classes":source.length,
+							"total_expected_classes":141,
+							"pathway_unit":createObj(0),
+							"default_batching_eligible_lessons":null,
+							"is_default_pathway":true
+						}
+					]
+				},
+				"query":"mutation upsertCoursePathway($updatedData: [course_course_pathways_insert_input!]!) {\n  course: insert_course_course_pathways(objects: $updatedData, on_conflict: {constraint: course_pathways_pkey, update_columns: [title, starting_pathway_unit_id, total_expected_classes, total_classes, is_floating, is_default_pathway, default_batching_eligible_lessons]}) {\n    returning {\n      id\n      title\n      __typename\n    }\n    __typename\n  }\n}\n"
+			};
+
+			console.log(requestBody);
+
+			fetch("https://hasuraapi.lidolearning.com/v1/graphql", {
+				"headers": {
+				"accept": "*/*",
+				"accept-language": "en-GB,en-US;q=0.9,en;q=0.8",
+				"authorization": "Bearer "+token,
+				"cache-control": "no-cache",
+				"content-type": "application/json",
+				"pragma": "no-cache",
+				"sec-ch-ua": "\"Google Chrome\";v=\"93\", \" Not;A Brand\";v=\"99\", \"Chromium\";v=\"93\"",
+				"sec-ch-ua-mobile": "?0",
+				"sec-ch-ua-platform": "\"Linux\"",
+				"sec-fetch-dest": "empty",
+				"sec-fetch-mode": "cors",
+				"sec-fetch-site": "same-site",
+				"x-hasura-role": "course-admin"
+				},
+				"referrer": "https://admincontent.lidolearning.com/",
+				"referrerPolicy": "strict-origin-when-cross-origin",
+				"body": JSON.stringify(requestBody),
+				"method": "POST",
+				"mode": "cors",
+				"credentials": "include"
+			});
+
+		};
+		
+	</script>
+</html>

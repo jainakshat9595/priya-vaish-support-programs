@@ -1,0 +1,111 @@
+{
+   "operationName":"upsertQuestion",
+   "variables":{
+      "question":{
+         "id":"72125885-4974-4d4c-a8f5-e3cc4bbea887",
+         "status_id":3,
+         "difficulty_level_id":1,
+         "format_id":"scq",
+         "type_id":2,
+         "rubric_id":"",
+         "hint":"",
+         "solution":"**(b) Crop field**\\n\\n**Explanation**:\\n\\nCrop field is a man made ecosystem",
+         "slug_id":"Sc_G10_EXEMPLAR_Ch15_Ex1_1",
+         "text":"Which one of the following is an artificial ecosystem?",
+         "widgets":[
+            
+         ],
+         "steps":[
+            
+         ],
+         "options":[
+            {
+               "text":"Pond\\n\\n",
+               "isCorrect":false,
+               "floor":null,
+               "ceil":null
+            },
+            {
+               "text":"Crop field ",
+               "isCorrect":true,
+               "floor":null,
+               "ceil":null
+            },
+            {
+               "text":"Lake\\n\\n",
+               "isCorrect":false,
+               "floor":null,
+               "ceil":null
+            },
+            {
+               "text":" Forest ",
+               "isCorrect":false,
+               "floor":null,
+               "ceil":null
+            }
+         ],
+         "is_partial_marking":false,
+         "question_image":null,
+         "question_learning_outcomes":{
+            "data":[
+               {
+                  "learning_outcome_id":"BI_EC_ES_LO_8",
+                  "is_active":true
+               }
+            ],
+            "on_conflict":{
+               "constraint":"question_learning_outcomes_question_id_learning_outcome_id_key",
+               "update_columns":"is_active"
+            }
+         },
+         "board_grades":{
+            "data":[
+               {
+                  "grade_id":10,
+                  "board_id":1,
+                  "is_active":true
+               }
+            ],
+            "on_conflict":{
+               "constraint":"question_board_grades_question_id_board_id_grade_id_key",
+               "update_columns":"is_active"
+            }
+         },
+         "question_reviews":{
+            "data":[
+               {
+                  "creator_id":"b01e2812-8b58-49de-b5f9-d1d987e42e66",
+                  "reviewer_id":"b01e2812-8b58-49de-b5f9-d1d987e42e66",
+                  "num_times_rejected":0
+               }
+            ],
+            "on_conflict":{
+               "constraint":"question_review_track_question_id_key",
+               "update_columns":[
+                  "creator_id",
+                  "reviewer_id",
+                  "num_times_rejected"
+               ]
+            }
+         },
+         "comments":{
+            "data":[
+               
+            ],
+            "on_conflict":{
+               "constraint":"question_comments_id_key",
+               "update_columns":[
+                  "comment_text",
+                  "comment_status_id"
+               ]
+            }
+         }
+      },
+      "exercise":{
+         "question_slug":"Sc_G10_EXEMPLAR_Ch15_Ex1_1",
+         "exercise_id":"16e62c5a-0d3f-4aaa-9dc4-0d37e68e06bf",
+         "sort_order":0
+      }
+   },
+   "query":"mutation upsertQuestion($question: question_bank_questions_insert_input\u0021, $exercise: question_bank_qb_exercise_questions_insert_input\u0021) {\\n  operation: insert_question_bank_questions(objects: [$question], on_conflict: {constraint: questions_id_key, update_columns: [difficulty_level_id, format_id, hint, solution, options, status_id, steps, text, type_id, rubric_id, widgets, is_partial_marking, question_image]}) {\\n    returning {\\n      id\\n      slug_id\\n      __typename\\n    }\\n    __typename\\n  }\\n  insert_question_bank_qb_exercise_questions(objects: [$exercise], on_conflict: {constraint: qb_exercise_questions_question_slug_key, update_columns: [exercise_id, sort_order]}) {\\n    returning {\\n      question_slug\\n      id\\n      __typename\\n    }\\n    __typename\\n  }\\n}\\n"
+}
