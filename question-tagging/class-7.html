@@ -1,0 +1,273 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<style>
+			table {
+			  font-family: arial, sans-serif;
+			  border-collapse: collapse;
+			  width: 100%;
+			}
+
+			td, th {
+			  border: 1px solid #dddddd;
+			  text-align: left;
+			  padding: 8px;
+			}
+
+			tr:nth-child(even) {
+			  background-color: #dddddd;
+			}
+		</style>
+	</head>
+	<body>
+		<span>Question tagging - Class 7</span>
+		<input
+			id="jwt-token"
+			placeholder="Token"
+			value=""
+		/>
+		<input
+			id="lo-slug"
+			placeholder="LO"
+			value=""
+		/>
+		<button id="send-btn" onclick="start();">Send</button>
+		<div id="result-div"></div>
+	</body>
+	<script>
+
+		const board = [
+			'CBSE',
+			'ICSE',
+			'Other'
+		];
+
+		const start = () => {
+
+			document.getElementById("result-div").innerHTML = '';
+
+			const token = document.getElementById('jwt-token').value;
+			const lo = document.getElementById('lo-slug').value;
+
+			fetch("https://hasuraapi.lidolearning.com/v1/graphql", {
+				"headers": {
+					"accept": "*/*",
+					"accept-language": "en-GB,en-US;q=0.9,en;q=0.8",
+					"authorization": "Bearer "+token,
+					"content-type": "application/json",
+					"sec-ch-ua": "\"Chromium\";v=\"92\", \" Not A;Brand\";v=\"99\", \"Google Chrome\";v=\"92\"",
+					"sec-ch-ua-mobile": "?0",
+					"sec-fetch-dest": "empty",
+					"sec-fetch-mode": "cors",
+					"sec-fetch-site": "same-site",
+					"x-hasura-role": "qb-admin"
+				},
+				"referrer": "https://adminqb.lidolearning.com/",
+				"referrerPolicy": "strict-origin-when-cross-origin",
+				"body": "{\"operationName\":\"getQuestionsByStatus\",\"variables\":{\"pagination\":50,\"page\":0,\"where\":{\"question_learning_outcomes\":{\"learning_outcome_id\":{\"_in\":[\""+lo+"\"]},\"is_active\":{\"_eq\":true}},\"status_id\":{\"_eq\":3}}},\"query\":\"query getQuestionsByStatus($pagination: Int!, $page: Int!, $where: question_bank_questions_bool_exp!) {\\n  question_bank_questions(where: $where, limit: $pagination, offset: $page, order_by: {updated_at: desc}) {\\n    id\\n    slug_id\\n    text\\n    board_grades(where: {is_active: {_eq: true}}) {\\n      id\\n      grade_id\\n      board_id\\n      is_active\\n      __typename\\n    }\\n    source {\\n      name\\n      __typename\\n    }\\n    format {\\n      name\\n      __typename\\n    }\\n    type {\\n      name\\n      __typename\\n    }\\n    difficulty_level {\\n      name\\n      __typename\\n    }\\n    question_learning_outcomes(where: {is_active: {_eq: true}}) {\\n      id: learning_outcome_id\\n      __typename\\n    }\\n    __typename\\n  }\\n}\\n\"}",
+				"method": "POST",
+				"mode": "cors"
+			})
+			.then(res => res.json())
+			.then(res => {
+				console.log(res);
+				if(res.errors) {
+					alert(res.errors[0].message);
+				} else {
+					let questions = res.data.question_bank_questions;
+
+					let buffy = '<table>';
+					questions.forEach((question, i) => {
+						buffy += '<tr id="row-'+i+'">'
+						let subBuffy = '\
+							<td>\
+								<b>\
+									'+question.slug_id+'\
+									<button id="add-tag-btn" onclick="addTag(\''+question.slug_id+'\', \'row-'+i+'\');" data-slug-id="'+question.slug_id+'">(Tag CBSE 7)</button>\
+								</b>\
+							</td>\
+						';
+						question.board_grades.forEach(boardGrade => {
+							subBuffy += '\
+								<td>'+(board[(boardGrade.board_id-1)]+' - '+boardGrade.grade_id)+'</td>\
+							';
+						});
+						buffy += subBuffy;
+						buffy += '</tr>'
+					});
+					buffy += '<table>';
+					document.getElementById("result-div").innerHTML = buffy;
+				}
+			})
+			.catch(e => console.log(e));
+		}
+
+		const getQuestionDataBySlug = questionSlug => new Promise((resolve, reject) => {
+
+			const token = document.getElementById('jwt-token').value;
+
+			fetch("https://hasuraapi.lidolearning.com/v1/graphql", {
+				"headers": {
+					"accept": "*/*",
+					"accept-language": "en-GB,en-US;q=0.9,en;q=0.8",
+					"authorization": "Bearer "+token,
+					"cache-control": "no-cache",
+					"content-type": "application/json",
+					"sec-ch-ua": "\"Chromium\";v=\"92\", \" Not A;Brand\";v=\"99\", \"Google Chrome\";v=\"92\"",
+					"sec-ch-ua-mobile": "?0",
+					"sec-fetch-dest": "empty",
+					"sec-fetch-mode": "cors",
+					"sec-fetch-site": "same-site",
+					"x-hasura-role": "qb-admin"
+				},
+				"referrer": "https://adminqb.lidolearning.com/",
+				"referrerPolicy": "strict-origin-when-cross-origin",
+				"body": "{\"operationName\":\"getQuestionBySlugId\",\"variables\":{\"slug_id\":\""+questionSlug+"\"},\"query\":\"query getQuestionBySlugId($slug_id: String!) {\\n  question_bank_questions(where: {slug_id: {_eq: $slug_id}}) {\\n    id\\n    slug_id\\n    text\\n    hint\\n    solution\\n    steps\\n    options\\n    widgets\\n    status_id\\n    difficulty_level_id\\n    format_id\\n    type_id\\n    rubric_id\\n    is_partial_marking\\n    question_image\\n    question_learning_outcomes(where: {is_active: {_eq: true}}) {\\n      is_active\\n      learning_outcome_id\\n      __typename\\n    }\\n    version\\n    exercise {\\n      exercise_id\\n      sort_order\\n      __typename\\n    }\\n    board_grades(where: {is_active: {_eq: true}}) {\\n      id\\n      grade_id\\n      board_id\\n      is_active\\n      __typename\\n    }\\n    video_solutions {\\n      url\\n      transcript\\n      status_id\\n      thumbnail_url\\n      upload_date\\n      video_title\\n      description\\n      __typename\\n    }\\n    question_reviews {\\n      creator_id\\n      reviewer_id\\n      num_times_rejected\\n      __typename\\n    }\\n    comments(where: {comment_status_id: {_neq: 3}}, order_by: {created_at: asc}) {\\n      comment_metadata\\n      comment_status_id\\n      comment_text\\n      created_by\\n      id\\n      parent_comment_id\\n      __typename\\n    }\\n    __typename\\n  }\\n}\\n\"}",
+				"method": "POST",
+				"mode": "cors",
+				"credentials": "include"
+			})
+			.then(res => res.json())
+			.then(res => {
+				console.log(res);
+				if(res.errors) {
+					alert(res.errors[0].message);
+				} else {
+					let questions = res.data.question_bank_questions;
+					resolve(questions[0]);
+				}
+			})
+			.catch(e => {
+				console.log(e);
+				reject();
+			});
+		});
+
+		const addTag = async (questionSlug, rowId) => {
+			const questionData = await getQuestionDataBySlug(questionSlug);
+
+			const token = document.getElementById('jwt-token').value;
+
+			const requestBody = {
+				"operationName":"upsertQuestion",
+				"variables":{
+					"question":{
+						"id":questionData.id,
+						"status_id":questionData.status_id,
+						"difficulty_level_id":questionData.difficulty_level_id,
+						"format_id":questionData.format_id,
+						"type_id":questionData.type_id,
+						"rubric_id":questionData.rubric_id,
+						"hint":questionData.hint,
+						"solution":questionData.solution,
+						"slug_id":questionData.slug_id,
+						"text":questionData.text,
+						"widgets":questionData.widgets,
+						"steps":[
+							
+						],
+						"options":questionData.options,
+						"is_partial_marking":questionData.is_partial_marking,
+						"question_image":questionData.question_image,
+						"question_learning_outcomes":{
+							"data":questionData.question_learning_outcomes.map(item => ({
+								is_active:item.is_active,
+								learning_outcome_id:item.learning_outcome_id
+							})),
+							"on_conflict":{
+								"constraint":"question_learning_outcomes_question_id_learning_outcome_id_key",
+								"update_columns":"is_active"
+							}
+						},
+						"board_grades":{
+							"data":questionData.board_grades.map(item => ({
+								grade_id:item.grade_id,
+								board_id:item.board_id,
+								is_active:item.is_active,
+							})).concat({
+								grade_id:7,
+								board_id:1,
+								is_active:true,
+							}),
+							"on_conflict":{
+								"constraint":"question_board_grades_question_id_board_id_grade_id_key",
+								"update_columns":"is_active"
+							}
+						},
+						"question_reviews":{
+							"data":questionData.question_reviews.map(item => ({
+								creator_id:item.creator_id,
+								num_times_rejected:item.num_times_rejected,
+								reviewer_id:item.reviewer_id
+							})),
+							"on_conflict":{
+								"constraint":"question_review_track_question_id_key",
+								"update_columns":[
+									"creator_id",
+									"reviewer_id",
+									"num_times_rejected"
+								]
+							}
+						},
+						"comments":{
+							"data":questionData.comments.map(item => ({
+								id:item.id,
+								comment_text:item.comment_text,
+								comment_metadata:item.comment_metadata,
+								parent_comment_id:item.parent_comment_id,
+								comment_status_id:item.comment_status_id,
+							})),
+							"on_conflict":{
+								"constraint":"question_comments_id_key",
+								"update_columns":[
+									"comment_text",
+									"comment_status_id"
+								]
+							}
+						}
+					},
+					"exercise":{
+						"question_slug":questionData.slug_id,
+						"sort_order":questionData.exercise.sort_order
+					}
+				},
+				"query":"mutation upsertQuestion($question: question_bank_questions_insert_input!, $exercise: question_bank_qb_exercise_questions_insert_input!) {\n  operation: insert_question_bank_questions(objects: [$question], on_conflict: {constraint: questions_id_key, update_columns: [difficulty_level_id, format_id, hint, solution, options, status_id, steps, text, type_id, rubric_id, widgets, is_partial_marking, question_image]}) {\n    returning {\n      id\n      slug_id\n      __typename\n    }\n    __typename\n  }\n  insert_question_bank_qb_exercise_questions(objects: [$exercise], on_conflict: {constraint: qb_exercise_questions_question_slug_key, update_columns: [exercise_id, sort_order]}) {\n    returning {\n      question_slug\n      id\n      __typename\n    }\n    __typename\n  }\n}\n"
+			};
+			
+			fetch("https://hasuraapi.lidolearning.com/v1/graphql", {
+				"headers": {
+					"accept": "*/*",
+					"accept-language": "en-GB,en-US;q=0.9,en;q=0.8",
+					"authorization": "Bearer "+token,
+					"content-type": "application/json",
+					"sec-ch-ua": "\"Chromium\";v=\"92\", \" Not A;Brand\";v=\"99\", \"Google Chrome\";v=\"92\"",
+					"sec-ch-ua-mobile": "?0",
+					"sec-fetch-dest": "empty",
+					"sec-fetch-mode": "cors",
+					"sec-fetch-site": "same-site",
+					"x-hasura-role": "qb-admin"
+				},
+				"referrer": "https://adminqb.lidolearning.com/",
+				"referrerPolicy": "strict-origin-when-cross-origin",
+				"body": JSON.stringify(requestBody),
+				"method": "POST",
+				"mode": "cors",
+				"credentials": "include"
+			})
+			.then(res => res.json())
+			.then(res => {
+				console.log(res);
+				if(res.errors) {
+					alert(res.errors[0].message);
+				} else {
+					alert('Done!');
+					document.getElementById(rowId).style.backgroundColor = 'green';
+				}
+			})
+			.catch(e => {
+				console.log(e);
+			});
+		}
+
+	</script>
+</html>

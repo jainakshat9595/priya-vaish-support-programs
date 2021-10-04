@@ -20,6 +20,7 @@
 		</style>
 	</head>
 	<body>
+		<span>Question tagging - Class 6</span>
 		<input
 			id="jwt-token"
 			placeholder="Token"
@@ -82,7 +83,7 @@
 							<td>\
 								<b>\
 									'+question.slug_id+'\
-									<button id="add-tag-btn" onclick="addTag(\''+question.slug_id+'\', \'row-'+i+'\');" data-slug-id="'+question.slug_id+'">(Tag CBSE 9)</button>\
+									<button id="add-tag-btn" onclick="addTag(\''+question.slug_id+'\', \'row-'+i+'\');" data-slug-id="'+question.slug_id+'">(Tag CBSE 6)</button>\
 								</b>\
 							</td>\
 						';
@@ -184,7 +185,7 @@
 								board_id:item.board_id,
 								is_active:item.is_active,
 							})).concat({
-								grade_id:9,
+								grade_id:6,
 								board_id:1,
 								is_active:true,
 							}),
